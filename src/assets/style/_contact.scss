@@ -21,6 +21,10 @@
       color: $gray-600;
       @include serif-font;
     }
+
+    &.comment {
+      background-color: #f8f9fa !important;
+    }
   }
   label {
     font-size: 0.85em;
