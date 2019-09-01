@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/workplacetea/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/workplacetea/schema.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Teas/Teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Teas/Teas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/mutations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/queries.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/subscriptions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/utils.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,7 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1567217335725</updated>
       <workItem from="1567217337198" duration="9117000" />
-      <workItem from="1567277715014" duration="20526000" />
+      <workItem from="1567277715014" duration="27453000" />
     </task>
     <servers />
   </component>

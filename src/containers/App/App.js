@@ -4,8 +4,9 @@ import Teas from '../Teas/Teas';
 import Layout from '../../hoc/Layout';
 import {API, graphqlOperation} from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
-import {listTeas} from '../../graphql/queries';
+import {getWorkplace} from '../../graphql/queries';
 import Spinner from '../../components/Theme/Spinner/Spinner';
+import {getWorkplaceId} from "../../helpers/utils";
 
 class App extends Component {
     state = {
@@ -24,10 +25,15 @@ class App extends Component {
         event.preventDefault();
 
         if (this.state.tea.content.length) {
-            API.graphql(graphqlOperation(mutations.createTea, {input: {content: this.state.tea.content}})).then(res => {
+            API.graphql(graphqlOperation(mutations.createTea, {
+                input: {
+                    content: this.state.tea.content,
+                    teaWorkplaceId: getWorkplaceId()
+                }
+            })).then(res => {
                 this.listTeas();
             }).finally(res => {
-                this.setState({tea: {content: ""}});
+                this.setState({tea: { content: "" }})
             });
         }
     };
@@ -43,9 +49,12 @@ class App extends Component {
             variables.nextToken = this.state.nextToken;
         }
 
-        API.graphql(graphqlOperation(listTeas, variables)).then(res => {
-            if(res.data.listTeas.items.length) {
-                this.setState({items: res.data.listTeas.items, nextToken: res.data.listTeas.nextToken})
+        API.graphql(graphqlOperation(getWorkplace, {id: getWorkplaceId(), sortDirection: 'DESC'})).then(res => {
+            const teas = res.data.getWorkplace.teas.items;
+            if (teas.length) {
+                this.setState({items: teas, nextToken: teas.nextToken});
+            } else {
+                this.setState({items: []});
             }
         });
     };

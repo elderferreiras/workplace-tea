@@ -1,6 +1,43 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelSortDirection) {
+  getWorkplace(id: $id) {
+    id
+    name
+    createdAt
+    teas(sortDirection: $sortDirection) {
+      items {
+        id
+        content
+        up
+        down
+        createdAt
+      }
+      nextToken
+    }
+  }
+}
+`;
+
+export const listWorkplaces = `query ListWorkplaces(
+  $filter: ModelWorkplaceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWorkplaces(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      createdAt
+      teas {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const getTea = `query GetTea($id: ID!) {
   getTea(id: $id) {
     id
@@ -8,11 +45,19 @@ export const getTea = `query GetTea($id: ID!) {
     up
     down
     createdAt
+    workplace {
+      id
+      name
+      createdAt
+      teas {
+        nextToken
+      }
+    }
     comments {
       items {
         id
-        author
         content
+        author
         createdAt
       }
       nextToken
@@ -28,6 +73,11 @@ export const listTeas = `query ListTeas($filter: ModelTeaFilterInput, $limit: In
       up
       down
       createdAt
+      workplace {
+        id
+        name
+        createdAt
+      }
       comments {
         nextToken
       }
@@ -39,8 +89,8 @@ export const listTeas = `query ListTeas($filter: ModelTeaFilterInput, $limit: In
 export const getComment = `query GetComment($id: ID!) {
   getComment(id: $id) {
     id
-    author
     content
+    author
     createdAt
     tea {
       id
@@ -48,6 +98,11 @@ export const getComment = `query GetComment($id: ID!) {
       up
       down
       createdAt
+      workplace {
+        id
+        name
+        createdAt
+      }
       comments {
         nextToken
       }
@@ -63,8 +118,8 @@ export const listComments = `query ListComments(
   listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      author
       content
+      author
       createdAt
       tea {
         id

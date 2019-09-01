@@ -1,6 +1,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateWorkplace = `subscription OnCreateWorkplace {
+  onCreateWorkplace {
+    id
+    name
+    createdAt
+    teas {
+      items {
+        id
+        content
+        up
+        down
+        createdAt
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onUpdateWorkplace = `subscription OnUpdateWorkplace {
+  onUpdateWorkplace {
+    id
+    name
+    createdAt
+    teas {
+      items {
+        id
+        content
+        up
+        down
+        createdAt
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onDeleteWorkplace = `subscription OnDeleteWorkplace {
+  onDeleteWorkplace {
+    id
+    name
+    createdAt
+    teas {
+      items {
+        id
+        content
+        up
+        down
+        createdAt
+      }
+      nextToken
+    }
+  }
+}
+`;
 export const onCreateTea = `subscription OnCreateTea {
   onCreateTea {
     id
@@ -8,11 +62,19 @@ export const onCreateTea = `subscription OnCreateTea {
     up
     down
     createdAt
+    workplace {
+      id
+      name
+      createdAt
+      teas {
+        nextToken
+      }
+    }
     comments {
       items {
         id
-        author
         content
+        author
         createdAt
       }
       nextToken
@@ -27,11 +89,19 @@ export const onUpdateTea = `subscription OnUpdateTea {
     up
     down
     createdAt
+    workplace {
+      id
+      name
+      createdAt
+      teas {
+        nextToken
+      }
+    }
     comments {
       items {
         id
-        author
         content
+        author
         createdAt
       }
       nextToken
@@ -46,11 +116,19 @@ export const onDeleteTea = `subscription OnDeleteTea {
     up
     down
     createdAt
+    workplace {
+      id
+      name
+      createdAt
+      teas {
+        nextToken
+      }
+    }
     comments {
       items {
         id
-        author
         content
+        author
         createdAt
       }
       nextToken
@@ -61,8 +139,8 @@ export const onDeleteTea = `subscription OnDeleteTea {
 export const onCreateComment = `subscription OnCreateComment {
   onCreateComment {
     id
-    author
     content
+    author
     createdAt
     tea {
       id
@@ -70,6 +148,11 @@ export const onCreateComment = `subscription OnCreateComment {
       up
       down
       createdAt
+      workplace {
+        id
+        name
+        createdAt
+      }
       comments {
         nextToken
       }
@@ -80,8 +163,8 @@ export const onCreateComment = `subscription OnCreateComment {
 export const onUpdateComment = `subscription OnUpdateComment {
   onUpdateComment {
     id
-    author
     content
+    author
     createdAt
     tea {
       id
@@ -89,6 +172,11 @@ export const onUpdateComment = `subscription OnUpdateComment {
       up
       down
       createdAt
+      workplace {
+        id
+        name
+        createdAt
+      }
       comments {
         nextToken
       }
@@ -99,8 +187,8 @@ export const onUpdateComment = `subscription OnUpdateComment {
 export const onDeleteComment = `subscription OnDeleteComment {
   onDeleteComment {
     id
-    author
     content
+    author
     createdAt
     tea {
       id
@@ -108,6 +196,11 @@ export const onDeleteComment = `subscription OnDeleteComment {
       up
       down
       createdAt
+      workplace {
+        id
+        name
+        createdAt
+      }
       comments {
         nextToken
       }
