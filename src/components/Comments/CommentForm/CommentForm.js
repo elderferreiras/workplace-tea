@@ -3,11 +3,11 @@ import {Spinner} from 'react-bootstrap';
 
 const commentForm = (props) => {
     return (
-        <div className="row bg-light">
+        <div className="row">
 
             {!props.submitting ?
                 <div className="col-lg-12 mx-auto">
-                    <form name="sentMessage" id="contactForm" noValidate onSubmit={props.submit}>
+                    <form name="sentMessage" id="contactForm" noValidate onSubmit={props.submit} className="bg-light" style={{padding: "20px"}}>
                         <div className="control-group">
                             <div className="form-group floating-label-form-group controls">
                                 <label>Comment</label>
