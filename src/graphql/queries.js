@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelSortDirection) {
+export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelSortDirection, $limit: Int, $nextToken: String) {
   getWorkplace(id: $id) {
     id
     name
     createdAt
-    teas(sortDirection: $sortDirection) {
+    teas(sortDirection: $sortDirection, limit: $limit, nextToken: $nextToken) {
       items {
         id
         content

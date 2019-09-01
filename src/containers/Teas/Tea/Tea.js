@@ -34,7 +34,7 @@ class Tea extends Component {
             this.setState({submittingComment: true});
             API.graphql(graphqlOperation(mutations.createComment, {input: {
                 content: this.state.comment,
-                author: randomGenerator.generate(),
+                author: randomGenerator.generate().toLowerCase(),
                 commentTeaId: this.state.tea.id
             }})).then(res => {
                 this.getTea();

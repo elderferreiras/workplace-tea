@@ -7,15 +7,39 @@ import * as mutations from '../../graphql/mutations';
 import {getWorkplace} from '../../graphql/queries';
 import Spinner from '../../components/Theme/Spinner/Spinner';
 import {getWorkplaceId} from "../../helpers/utils";
+import debounce from "lodash.debounce";
 
 class App extends Component {
-    state = {
-        tea: {
-            content: ""
-        },
-        items: null,
-        nextToken: null
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tea: {
+                content: ""
+            },
+            items: [],
+            nextToken: null,
+            previousToken: null,
+            isLoading: false,
+            noMore: false
+        };
+
+        window.onscroll = debounce(() => {
+            if (this.state.isLoading || !this.state.nextToken) {
+                return;
+            }
+
+            if (
+                window.innerHeight + document.documentElement.scrollTop
+                === document.documentElement.offsetHeight
+            ) {
+                if (this.state.nextToken !== this.state.previousToken) {
+                    this.setState({isLoading: true});
+                    this.listTeas();
+                }
+            }
+        }, 100);
+    }
 
     componentDidMount() {
         this.listTeas();
@@ -25,15 +49,21 @@ class App extends Component {
         event.preventDefault();
 
         if (this.state.tea.content.length) {
+            this.setState({
+                tea: {content: ""},
+                nextToken: null,
+                previousToken: null,
+                noMore: false,
+                isLoading: false
+            });
+
             API.graphql(graphqlOperation(mutations.createTea, {
                 input: {
                     content: this.state.tea.content,
                     teaWorkplaceId: getWorkplaceId()
                 }
-            })).then(res => {
-                this.listTeas();
-            }).finally(res => {
-                this.setState({tea: { content: "" }})
+            })).finally(res => {
+                this.listTeas(true);
             });
         }
     };
@@ -42,19 +72,42 @@ class App extends Component {
         this.setState({tea: {content: event.target.value}});
     };
 
-    listTeas = () => {
-        let variables = {limit: 10};
+    listTeas = (refresh) => {
+        let variables = {id: getWorkplaceId(), sortDirection: 'DESC', limit: 10};
 
-        if (this.state.nextToken) {
+        if (refresh === undefined && this.state.nextToken) {
             variables.nextToken = this.state.nextToken;
         }
 
-        API.graphql(graphqlOperation(getWorkplace, {id: getWorkplaceId(), sortDirection: 'DESC'})).then(res => {
-            const teas = res.data.getWorkplace.teas.items;
-            if (teas.length) {
-                this.setState({items: teas, nextToken: teas.nextToken});
+        API.graphql(graphqlOperation(getWorkplace, variables)).then(res => {
+            const currentTeas = this.state.items;
+            const teas = res.data.getWorkplace.teas;
+            const previousToken = refresh === undefined? this.state.nextToken : null;
+
+            if (teas.items.length) {
+                const newItems = refresh === undefined? currentTeas.concat(teas.items) : teas.items;
+
+                this.setState({
+                    items: newItems,
+                    nextToken: teas.nextToken,
+                    isLoading: false,
+                    previousToken: previousToken
+                });
             } else {
-                this.setState({items: []});
+                const newItems = refresh === undefined? currentTeas: teas.items;
+
+                this.setState({
+                    items: newItems,
+                    isLoading: false,
+                    nextToken: teas.nextToken,
+                    previousToken: previousToken
+                });
+            }
+
+            const nextToken = res.data.getWorkplace.teas.nextToken;
+
+            if (refresh === undefined && previousToken && !nextToken) {
+                this.setState({noMore: true});
             }
         });
     };
@@ -82,7 +135,7 @@ class App extends Component {
 
         const teaIndex = currentTea.findIndex(tea => tea.id === res.data.updateTea.id);
 
-        currentTea[0] = {...currentTea[teaIndex], up: res.data.updateTea.up, down: res.data.updateTea.down};
+        currentTea[teaIndex] = {...currentTea[teaIndex], up: res.data.updateTea.up, down: res.data.updateTea.down};
 
         this.setState({items: currentTea});
     };
@@ -112,7 +165,8 @@ class App extends Component {
                     upHandler={this.upHandler}
                     downHandler={this.downHandler}
                     next={this.nextHandler}
-                    hasNext={!!this.state.nextToken}
+                    isLoading={this.state.isLoading}
+                    noMore={this.state.noMore}
                 /> : <Spinner/>}
             </Layout>
         );

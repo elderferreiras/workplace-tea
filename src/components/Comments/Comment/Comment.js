@@ -15,7 +15,7 @@ const comment = (props) => {
                     </div>
                 </div>
             </div>
-            <hr/>
+            {props.index === (props.total - 1)? null : <hr/>}
         </Fragment>
     );
 };

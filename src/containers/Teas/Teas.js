@@ -1,6 +1,7 @@
 import React from 'react';
-import Items from "../../components/Items/Items";
-import Pagination from "../../components/Theme/Pagination/Pagination";
+import Items from '../../components/Items/Items';
+import Loading from '../../components/Theme/LoadingTeas/LoadingTeas';
+import NoMoreTea from '../../components/Theme/NoMoreTea/NoMoreTea';
 
 const Teas = (props) => {
     return (
@@ -13,7 +14,8 @@ const Teas = (props) => {
                             upHandler={props.upHandler}
                             downHandler={props.downHandler}
                         /> : <p>No tea has been spilled yet. Want to be the first to spill it?</p>}
-                    {props.hasNext ? <Pagination next={props.next}/> : null}
+                    {props.isLoading ? <Loading/> : null}
+                    {props.noMore ? <NoMoreTea/> : null}
                 </div>
             </div>
         </div>
