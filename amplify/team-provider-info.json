@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "workplace-tea-dev-20190831145900-authRole",
+            "UnauthRoleArn": "arn:aws:iam::757599292990:role/workplace-tea-dev-20190831145900-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::757599292990:role/workplace-tea-dev-20190831145900-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "workplace-tea-dev-20190831145900-deployment",
+            "UnauthRoleName": "workplace-tea-dev-20190831145900-unauthRole",
+            "StackName": "workplace-tea-dev-20190831145900",
+            "StackId": "arn:aws:cloudformation:us-west-2:757599292990:stack/workplace-tea-dev-20190831145900/285faa20-cc32-11e9-8445-06dcf5c4ac1e"
+        }
+    }
+}

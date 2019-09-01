@@ -1,0 +1,15 @@
+type Tea @model {
+  id: ID!
+  content: String!
+  up: Int
+  down: Int
+  createdAt: AWSDateTime
+  comments: [Comment] @connection(name: "TeaComments")
+}
+type Comment @model {
+  id: ID!
+  author: String
+  content: String!
+  createdAt: AWSDateTime
+  tea: Tea @connection(name: "TeaComments")
+}

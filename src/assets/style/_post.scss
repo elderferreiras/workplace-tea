@@ -43,6 +43,11 @@
   button {
     padding: 0 5px;
     border-radius: 5px;
+
+    &.selected {
+      color: white;
+      background-color: rgb(52, 58, 64);
+    }
   }
 
   @media only screen and (min-width: 768px) {

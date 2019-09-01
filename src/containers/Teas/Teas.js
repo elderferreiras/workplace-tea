@@ -1,20 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Items from "../../components/Items/Items";
 import Pagination from "../../components/Theme/Pagination/Pagination";
 
-class Teas extends Component {
-    render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-8 col-md-10 mx-auto">
-                        <Items items={this.props.items}/>
-                        <Pagination/>
-                    </div>
+const Teas = (props) => {
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-8 col-md-10 mx-auto">
+                    <Items
+                        items={props.items}
+                        upHandler={props.upHandler}
+                        downHandler={props.downHandler}
+                    />
+                    {props.hasNext? <Pagination next={props.next}/> : null}
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default Teas;
