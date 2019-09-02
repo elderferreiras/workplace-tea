@@ -26,18 +26,17 @@ class App extends Component {
             initialLoading: false
         };
 
-        window.ontouchmove = debounce(this.lazyLoad, 1000);
         window.onscroll = debounce(this.lazyLoad, 100);
     }
 
     lazyLoad = () => {
+
         if (this.state.isLoading || !this.state.nextToken) {
             return;
         }
 
         if (
-            window.innerHeight + document.documentElement.scrollTop
-            === document.documentElement.offsetHeight
+            (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight
         ) {
             if (this.state.nextToken !== this.state.previousToken) {
                 this.setState({isLoading: true});
