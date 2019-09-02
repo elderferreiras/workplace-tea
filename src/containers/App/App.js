@@ -36,7 +36,7 @@ class App extends Component {
         }
 
         if (
-            (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight
+            (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 100
         ) {
             if (this.state.nextToken !== this.state.previousToken) {
                 this.setState({isLoading: true});
