@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form} from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 
 const form = (props) => {
     return (
@@ -10,12 +10,20 @@ const form = (props) => {
                     as="textarea"
                     name="tea"
                     rows="3"
-                    maxLength={280}
+                    maxLength={250}
                     value={props.tea.content}
                     style={{fontSize: '1.2rem'}}
                     onChange={props.changed}/>
             </Form.Group>
-            <Button type="submit">Send</Button>
+            <Row>
+                <div className="text-left col-6">
+                    <span>{props.tea.count}/250</span>
+                </div>
+
+                <div className="text-right col-6">
+                    <Button type="submit">Send</Button>
+                </div>
+            </Row>
         </Form>
     );
 };

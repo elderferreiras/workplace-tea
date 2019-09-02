@@ -15,13 +15,15 @@ class App extends Component {
 
         this.state = {
             tea: {
-                content: ""
+                content: "",
+                count: 0,
             },
             items: [],
             nextToken: null,
             previousToken: null,
             isLoading: false,
-            noMore: false
+            noMore: false,
+            initialLoading: false
         };
 
         window.onscroll = debounce(() => {
@@ -42,6 +44,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        this.setState({initialLoading: true});
         this.listTeas();
     }
 
@@ -50,7 +53,7 @@ class App extends Component {
 
         if (this.state.tea.content.length) {
             this.setState({
-                tea: {content: ""},
+                tea: {content: "", count: 0},
                 nextToken: null,
                 previousToken: null,
                 noMore: false,
@@ -69,7 +72,7 @@ class App extends Component {
     };
 
     teaChangeHandler = (event) => {
-        this.setState({tea: {content: event.target.value}});
+        this.setState({tea: {content: event.target.value, count: event.target.value.length}});
     };
 
     listTeas = (refresh) => {
@@ -82,31 +85,31 @@ class App extends Component {
         API.graphql(graphqlOperation(getWorkplace, variables)).then(res => {
             const currentTeas = this.state.items;
             const teas = res.data.getWorkplace.teas;
-            const previousToken = refresh === undefined? this.state.nextToken : null;
+            const previousToken = refresh === undefined ? this.state.nextToken : null;
 
             if (teas.items.length) {
-                const newItems = refresh === undefined? currentTeas.concat(teas.items) : teas.items;
+                const newItems = refresh === undefined ? currentTeas.concat(teas.items) : teas.items;
 
                 this.setState({
-                    items: newItems,
-                    nextToken: teas.nextToken,
-                    isLoading: false,
-                    previousToken: previousToken
+                    items: newItems
                 });
             } else {
-                const newItems = refresh === undefined? currentTeas: teas.items;
+                const newItems = refresh === undefined ? currentTeas : teas.items;
 
                 this.setState({
-                    items: newItems,
-                    isLoading: false,
-                    nextToken: teas.nextToken,
-                    previousToken: previousToken
+                    items: newItems
                 });
             }
 
-            const nextToken = res.data.getWorkplace.teas.nextToken;
 
-            if (refresh === undefined && previousToken && !nextToken) {
+            this.setState({
+                isLoading: false,
+                initialLoading: false,
+                nextToken: teas.nextToken,
+                previousToken: previousToken
+            });
+
+            if (refresh === undefined && previousToken && !res.data.getWorkplace.teas.nextToken) {
                 this.setState({noMore: true});
             }
         });
@@ -160,7 +163,7 @@ class App extends Component {
         return (
             <Layout>
                 <TeaForm submit={this.teaSubmitHandler} tea={this.state.tea} changed={this.teaChangeHandler}/>
-                {this.state.items ? <Teas
+                {this.state.items && !this.state.initialLoading ? <Teas
                     items={this.state.items}
                     upHandler={this.upHandler}
                     downHandler={this.downHandler}
