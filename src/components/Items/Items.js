@@ -9,6 +9,7 @@ const items = (props) => {
         createdAt={item.createdAt}
         up={item.up}
         down={item.down}
+        comments={item.comments.items}
         upHandler={props.upHandler}
         downHandler={props.downHandler}
     />);

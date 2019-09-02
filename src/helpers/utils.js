@@ -1,6 +1,13 @@
-export const getDate = (date) => {
+export const getDate = (date, short) => {
     const objDate = new Date(date);
-    return `${objDate.toLocaleString('default', { month: 'long' })} ${objDate.getDate()}, ${objDate.getFullYear()}`
+    let month = objDate.toLocaleString('default', { month: 'long' });
+    return `${month} ${objDate.getDate()}, ${objDate.getFullYear()}`
+};
+
+export const getShortDate = (date, short) => {
+    const objDate = new Date(date);
+    let month = objDate.toLocaleString('default', { month: 'long' });
+    return `${month.toString().slice(0,3)} ${objDate.getDate()}, ${objDate.getFullYear()}`
 };
 
 export const getWorkplaceId = () => {

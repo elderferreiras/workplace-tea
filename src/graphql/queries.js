@@ -13,6 +13,11 @@ export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelS
         up
         down
         createdAt
+        comments {
+            items {
+                content
+            }
+        }
       }
       nextToken
     }
