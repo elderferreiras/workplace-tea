@@ -26,22 +26,25 @@ class App extends Component {
             initialLoading: false
         };
 
-        window.onscroll = debounce(() => {
-            if (this.state.isLoading || !this.state.nextToken) {
-                return;
-            }
-
-            if (
-                window.innerHeight + document.documentElement.scrollTop
-                === document.documentElement.offsetHeight
-            ) {
-                if (this.state.nextToken !== this.state.previousToken) {
-                    this.setState({isLoading: true});
-                    this.listTeas();
-                }
-            }
-        }, 100);
+        window.ontouchmove = debounce(this.lazyLoad, 1000);
+        window.onscroll = debounce(this.lazyLoad, 100);
     }
+
+    lazyLoad = () => {
+        if (this.state.isLoading || !this.state.nextToken) {
+            return;
+        }
+
+        if (
+            window.innerHeight + document.documentElement.scrollTop
+            === document.documentElement.offsetHeight
+        ) {
+            if (this.state.nextToken !== this.state.previousToken) {
+                this.setState({isLoading: true});
+                this.listTeas();
+            }
+        }
+    };
 
     componentDidMount() {
         this.setState({initialLoading: true});
