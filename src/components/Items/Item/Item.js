@@ -10,14 +10,14 @@ class Item extends Component {
     };
 
     componentDidMount() {
-       this.updateVotes();
+        this.updateVotes();
     }
 
     upVoteHandler = (id) => {
         const current = sessionStorage.getItem(id);
 
-        if(current && current.length) {
-            if(current === 'up') {
+        if (current && current.length) {
+            if (current === 'up') {
                 sessionStorage.removeItem(id);
                 this.props.upHandler(id, 'SUBTRACT');
             } else {
@@ -35,8 +35,8 @@ class Item extends Component {
     downVoteHandler = (id) => {
         const current = sessionStorage.getItem(id);
 
-        if(current && current.length) {
-            if(current === 'down') {
+        if (current && current.length) {
+            if (current === 'down') {
                 sessionStorage.removeItem(id);
                 this.props.downHandler(id, 'SUBTRACT');
             } else {
@@ -58,8 +58,8 @@ class Item extends Component {
 
         let vote = sessionStorage.getItem(this.props.id);
 
-        if(vote && vote.length) {
-            if(vote === 'up') {
+        if (vote && vote.length) {
+            if (vote === 'up') {
                 upVoteSelected = " selected";
             } else if (vote === 'down') {
                 downVoteSelected = " selected";
@@ -69,22 +69,22 @@ class Item extends Component {
         this.setState({up: upVoteSelected, down: downVoteSelected});
     };
 
-    render () {
+    render() {
         return (
             <Fragment>
                 <div className="post-preview">
+                    <div className="row text-left">
+                        <div className="col-12">
+                            <p className="post-meta">
+                               Posted on {getDate(this.props.createdAt)}
+                            </p>
+                        </div>
+                    </div>
                     <h3 className="post-subtitle">
                         {this.props.content}
                     </h3>
                     <div className="row text-left">
-                        <div className="col-8">
-                            <p className="post-meta">
-                                <Link to={"/tea/" + this.props.id}>
-                                    Posted on {getDate(this.props.createdAt)}
-                                </Link>
-                            </p>
-                        </div>
-                        <div className="col-4 text-right">
+                        <div className="col-6">
                             <Voting
                                 up={this.props.up ? this.props.up : 0}
                                 down={this.props.down ? this.props.down : 0}
@@ -94,6 +94,13 @@ class Item extends Component {
                                 upSelected={this.state.up}
                                 downSelected={this.state.down}
                             />
+                        </div>
+                        <div className="col-6 text-right">
+                            <p className="post-meta">
+                                <Link to={"/tea/" + this.props.id}>
+                                    {this.props.comments.length} {this.props.comments.length === 1? ' Comment' : ' Comments'}
+                                </Link>
+                            </p>
                         </div>
                     </div>
                 </div>
