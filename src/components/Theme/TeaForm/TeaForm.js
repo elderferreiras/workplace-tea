@@ -6,7 +6,7 @@ import Header from '../../../hoc/Header';
 const teaForm = (props) => {
     return (
         <Header backgroundImage={Background} page="site">
-            <Form submit={props.submit} tea={props.tea} changed={props.changed}/>
+            <Form tea={props.tea} submit={props.onSubmit} changed={props.onChange}/>
         </Header>
     );
 };

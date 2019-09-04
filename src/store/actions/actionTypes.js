@@ -1,0 +1,6 @@
+export const FETCH_TEAS_START = 'FETCH_TEAS_START';
+export const FETCH_TEAS_SUCCESS = 'LOADING_TEAS_SUCCESS';
+export const FETCH_TEAS_FAIL = 'FETCH_TEAS_FAIL';
+export const FETCH_MORE_TEAS = 'FETCH_MORE_TEAS';
+
+export const CREATE_TEA = 'CREATE_TEA';
