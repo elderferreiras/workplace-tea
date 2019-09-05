@@ -77,7 +77,7 @@ class App extends Component {
 
         let Filter = require('bad-words'),
             filter = new Filter();
-        filter.addWords('reddit', 'spilled', 'tea', 'script');
+        filter.addWords('reddit', 'spilled', 'tea', 'script', 'trump');
 
         if(filter.isProfane(content)) {
             return false;
