@@ -52,7 +52,12 @@ class App extends Component {
                 const ip = res.data.ip;
 
                 if (this.isTeaValid(this.state.tea.content)) {
-                    this.props.saveTea(this.state.tea.content, res.data.ip);
+                    //I am a very cool person and all I'm trying to do is....
+                    if (this.props.teas.findIndex(tea => ip === tea.ip) !== -1) {
+                        this.props.blockIP(ip);
+                    } else {
+                        this.props.saveTea(this.state.tea.content, res.data.ip);
+                    }
                 } else {
                     this.props.blockIP(ip);
                 }

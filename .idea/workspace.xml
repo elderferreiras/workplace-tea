@@ -4,7 +4,6 @@
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +84,7 @@
       <workItem from="1567385166219" duration="4246000" />
       <workItem from="1567454400055" duration="1325000" />
       <workItem from="1567641904581" duration="12429000" />
-      <workItem from="1567656793081" duration="7416000" />
+      <workItem from="1567656793081" duration="8514000" />
     </task>
     <servers />
   </component>
@@ -94,6 +93,16 @@
     <option name="exactExcludedFiles">
       <list>
         <option value="$PROJECT_DIR$/node_modules/aws-sdk/scripts/services-table-generator.js" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
       </list>
     </option>
   </component>
