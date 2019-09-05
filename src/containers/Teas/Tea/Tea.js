@@ -59,7 +59,7 @@ class Tea extends Component {
         let Filter = require('bad-words'),
             filter = new Filter();
 
-        filter.addWords('reddit', 'spilled', 'tea', 'script', 'trump');
+        filter.addWords('reddit', 'spilled', 'tea', 'script', 'farts', 'fart', 'lorem', 'ipsum');
 
         if(filter.isProfane(content)) {
             return false;
