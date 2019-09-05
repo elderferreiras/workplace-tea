@@ -67,13 +67,17 @@ class App extends Component {
     };
 
     isTeaValid = (content) => {
+        if(content.length < 20 || content.length > 250) {
+            return false;
+        }
+
         if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(content)) {
             return false;
         }
 
         let Filter = require('bad-words'),
             filter = new Filter();
-        filter.addWords('reddit', 'spilled', 'tea', 'script', 'farts', 'fart', 'lorem', 'ipsum');
+        filter.addWords('reddit', 'spilled', 'tea', 'script', 'farts', 'fart', 'lorem', 'ipsum', 'fück');
 
         if(filter.isProfane(content)) {
             return false;
