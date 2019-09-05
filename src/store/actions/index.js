@@ -3,5 +3,12 @@ export {
     fetchTeas,
     fetchTeasSuccess,
     fetchTeasFail,
-    submitTea
+    submitTea,
+    isIPBlocked,
+    blockIP
 } from './teas';
+
+export {
+    fetchTea,
+    createComment
+} from './tea';

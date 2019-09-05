@@ -3,71 +3,122 @@ import Layout from '../../../hoc/Layout';
 import Header from '../../../hoc/Header';
 import TeaBackground from '../../../assets/images/background.png'
 import CommentsSection from '../../../components/Comments/CommentSection/CommentsSection';
-import { getDate } from '../../../helpers/utils';
-import {API, graphqlOperation} from 'aws-amplify';
-import { getTea } from '../../../graphql/queries';
+import {getDate} from '../../../helpers/utils';
 import Spinner from '../../../components/Theme/Spinner/Spinner';
-import * as mutations from '../../../graphql/mutations';
 import randomGenerator from 'random-username-generator';
+import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index';
+import axios from "axios";
 
 class Tea extends Component {
     state = {
-        tea: null,
         comment: "",
-        submittingComment: false
+        submittingComment: false,
+        valid: false
     };
 
     componentDidMount() {
-        this.getTea();
+        this.props.isIPBlocked();
+        this.props.getTea(this.props.match.params.id);
     }
-
-    getTea = () => {
-        API.graphql(graphqlOperation(getTea, {id: this.props.match.params.id})).then(res => {
-            this.setState({tea: res.data.getTea});
-        });
-    };
 
     submitCommentHandler = (event) => {
         event.preventDefault();
 
-        if(this.state.comment.length) {
+        if (this.state.comment.length) {
             this.setState({submittingComment: true});
-            API.graphql(graphqlOperation(mutations.createComment, {input: {
-                content: this.state.comment,
-                author: randomGenerator.generate().toLowerCase(),
-                commentTeaId: this.state.tea.id
-            }})).then(res => {
-                this.getTea();
+
+            axios.get('https://api.ipify.org/?format=json').then(res => {
+                const ip = res.data.ip;
+
+                if (this.isCommentValid(this.state.comment)) {
+                    this.props.createComment(
+                        this.state.comment,
+                        randomGenerator.generate().toLowerCase(),
+                        this.props.tea.id,
+                        ip
+                    );
+                } else {
+                    this.props.blockIP(ip);
+                }
             }).finally(res => {
-                this.setState({comment: "", submittingComment: false});
+                this.setState({comment: "", submittingComment: false, valid: false});
             });
         }
     };
 
+    isCommentValid = (content) => {
+        if(content.length <= 0) {
+            return false;
+        }
+
+        if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(content)) {
+            return false;
+        }
+
+        let Filter = require('bad-words'),
+            filter = new Filter();
+
+        if(filter.isProfane(content)) {
+            return false;
+        }
+
+        if (this.props.tea.comments.items.findIndex(comment => content === comment.content) !== -1) {
+            return false;
+        }
+
+        return true;
+    };
+
     changeCommentHandler = (event) => {
-        this.setState({comment: event.target.value});
+        if(this.isCommentValid(event.target.value)) {
+            this.setState({comment: event.target.value, valid: true});
+        } else {
+            this.setState({comment: event.target.value, valid: false});
+        }
     };
 
     render() {
-        return (
-            <Layout>
-                <Header backgroundImage={TeaBackground} page="post">
-                    { this.state.tea ?
-                        <Fragment>
-                            <h2 className="subheading">{this.state.tea.content}</h2>
-                            <span className="meta">Posted on {getDate(this.state.tea.createdAt)}</span>
-                        </Fragment> : null }
-                </Header>
-                { this.state.tea? <CommentsSection
-                    comments={this.state.tea.comments.items}
-                    submit={this.submitCommentHandler}
-                    changed={this.changeCommentHandler}
-                    comment={this.state.comment}
-                    submitting={this.state.submittingComment}
-                /> : <Spinner/>}
-            </Layout>
-        );
+        if(this.props.blocked) {
+            return <p>Sorry, mate. You've been banned.</p>;
+        } else {
+            return (
+                <Layout>
+                    <Header backgroundImage={TeaBackground} page="post">
+                        {this.props.tea ?
+                            <Fragment>
+                                <h2 className="subheading">{this.props.tea.content}</h2>
+                                <span className="meta">Posted on {getDate(this.props.tea.createdAt)}</span>
+                            </Fragment> : null}
+                    </Header>
+                    {this.props.tea ? <CommentsSection
+                        comments={this.props.tea.comments.items}
+                        submit={this.submitCommentHandler}
+                        changed={this.changeCommentHandler}
+                        comment={this.state.comment}
+                        submitting={this.state.submittingComment}
+                        valid={this.state.valid}
+                    /> : <Spinner/>}
+                </Layout>
+            );
+        }
     }
 }
 
-export default Tea;
+const mapStateToProps = (state) => {
+    return {
+        tea: state.teaReducer.tea,
+        blocked: state.teasReducer.blocked
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTea: (id) => dispatch(actions.fetchTea(id)),
+        createComment: (content, author, teaId, ip) => dispatch(actions.createComment(content, author, teaId, ip)),
+        isIPBlocked: () => dispatch(actions.isIPBlocked()),
+        blockIP: (ip) => dispatch(actions.blockIP(ip))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tea);

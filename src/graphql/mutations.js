@@ -12,6 +12,7 @@ export const createWorkplace = `mutation CreateWorkplace($input: CreateWorkplace
         content
         up
         down
+        ip
         createdAt
       }
       nextToken
@@ -30,6 +31,7 @@ export const updateWorkplace = `mutation UpdateWorkplace($input: UpdateWorkplace
         content
         up
         down
+        ip
         createdAt
       }
       nextToken
@@ -48,6 +50,7 @@ export const deleteWorkplace = `mutation DeleteWorkplace($input: DeleteWorkplace
         content
         up
         down
+        ip
         createdAt
       }
       nextToken
@@ -61,6 +64,7 @@ export const createTea = `mutation CreateTea($input: CreateTeaInput!) {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -75,6 +79,7 @@ export const createTea = `mutation CreateTea($input: CreateTeaInput!) {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -88,6 +93,7 @@ export const updateTea = `mutation UpdateTea($input: UpdateTeaInput!) {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -102,6 +108,7 @@ export const updateTea = `mutation UpdateTea($input: UpdateTeaInput!) {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -115,6 +122,7 @@ export const deleteTea = `mutation DeleteTea($input: DeleteTeaInput!) {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -129,6 +137,7 @@ export const deleteTea = `mutation DeleteTea($input: DeleteTeaInput!) {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -141,12 +150,14 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -154,6 +165,13 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         createdAt
       }
       comments {
+          items {
+            id
+            content
+            author
+            ip
+            createdAt
+          }
         nextToken
       }
     }
@@ -165,12 +183,14 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -189,12 +209,14 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -205,6 +227,27 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         nextToken
       }
     }
+  }
+}
+`;
+export const createBlockedIPs = `mutation CreateBlockedIPs($input: CreateBlockedIPsInput!) {
+  createBlockedIPs(input: $input) {
+    id
+    ip
+  }
+}
+`;
+export const updateBlockedIPs = `mutation UpdateBlockedIPs($input: UpdateBlockedIPsInput!) {
+  updateBlockedIPs(input: $input) {
+    id
+    ip
+  }
+}
+`;
+export const deleteBlockedIPs = `mutation DeleteBlockedIPs($input: DeleteBlockedIPsInput!) {
+  deleteBlockedIPs(input: $input) {
+    id
+    ip
   }
 }
 `;

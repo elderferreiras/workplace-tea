@@ -12,10 +12,12 @@ export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelS
         content
         up
         down
+        ip
         createdAt
         comments {
             items {
                 content
+                ip
             }
         }
       }
@@ -24,7 +26,6 @@ export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelS
   }
 }
 `;
-
 export const listWorkplaces = `query ListWorkplaces(
   $filter: ModelWorkplaceFilterInput
   $limit: Int
@@ -49,6 +50,7 @@ export const getTea = `query GetTea($id: ID!) {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -63,6 +65,7 @@ export const getTea = `query GetTea($id: ID!) {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -77,6 +80,7 @@ export const listTeas = `query ListTeas($filter: ModelTeaFilterInput, $limit: In
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -96,12 +100,14 @@ export const getComment = `query GetComment($id: ID!) {
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -125,14 +131,45 @@ export const listComments = `query ListComments(
       id
       content
       author
+      ip
       createdAt
       tea {
         id
         content
         up
         down
+        ip
         createdAt
       }
+    }
+    nextToken
+  }
+}
+`;
+export const getBlockedIPs = `query GetBlockedIPs($ip: String!) {
+  getBlockedIPs(ip: $ip) {
+    id
+    ip
+  }
+}
+`;
+export const listBlockedIPss = `query ListBlockedIPss(
+  $ip: String
+  $filter: ModelBlockedIPsFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listBlockedIPss(
+    ip: $ip
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      ip
     }
     nextToken
   }

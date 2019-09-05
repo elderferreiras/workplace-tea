@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Form, Row } from "react-bootstrap";
 
 const form = (props) => {
+    const disabled = props.tea.valid? '':'disabled';
+
     return (
         <Form onSubmit={props.submit}>
             <Form.Group controlId="exampleForm.ControlTextarea">
@@ -21,7 +23,7 @@ const form = (props) => {
                 </div>
 
                 <div className="text-right col-6">
-                    <Button type="submit">Send</Button>
+                    <Button type="submit" disabled={disabled}>Send</Button>
                 </div>
             </Row>
         </Form>

@@ -6,8 +6,9 @@ const initialState = {
     loading: false,
     error: null,
     hasEverything: false,
-    next: null,
-    previous: null
+    previous: null,
+    blocked: false,
+    next: null
 };
 
 const teasReducer = (state = initialState, action)  => {
@@ -19,12 +20,19 @@ const teasReducer = (state = initialState, action)  => {
                 starting: true
             };
         case actionTypes.FETCH_TEAS_SUCCESS:
-            const previousToken = state.next;
-            const hasEverything = previousToken && !action.next;
+            let previousToken = state.next;
+            let teas = state.teas.concat(action.teas);
+            let hasEverything = !action.init && previousToken && !action.next;
+
+            if (action.init) {
+                teas = action.teas;
+                previousToken = null;
+                hasEverything = false;
+            }
 
             return {
                 ...state,
-                teas: state.teas.concat(action.teas),
+                teas: teas,
                 previous: previousToken,
                 next: action.next,
                 error: null,
@@ -42,6 +50,27 @@ const teasReducer = (state = initialState, action)  => {
             return {
                 ...state,
                 loading: true
+            };
+        case actionTypes.CREATE_TEA_START:
+            return {
+                ...state
+            };
+        case actionTypes.CREATE_TEA_SUCCESS:
+            const currentTeas = [...state.teas];
+            currentTeas.unshift(action.tea);
+
+            return {
+                ...state,
+                teas: currentTeas
+            };
+        case actionTypes.CREATE_TEA_ERROR:
+            return {
+                ...state
+            };
+        case actionTypes.BLOCKED_IP:
+            return {
+                ...state,
+                blocked: true
             };
         default:
             return state;

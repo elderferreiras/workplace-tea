@@ -7,11 +7,13 @@ import {Provider} from 'react-redux';
 import {createStore, compose, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import teasReducer from './store/reducers/teas';
+import teaReducer from './store/reducers/tea';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    teasReducer: teasReducer
+    teasReducer: teasReducer,
+    teaReducer: teaReducer
 });
 
 const store = createStore(

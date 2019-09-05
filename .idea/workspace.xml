@@ -2,23 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions/teas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/reducers/teas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/actions/tea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/reducers/tea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/workplacetea/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/workplacetea/schema.graphql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Items/Item/Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Items/Item/Item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Items/Items.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Items/Items.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Theme/TeaForm/TeaForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/TeaForm/TeaForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Theme/Voting/Voting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/Voting/Voting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Theme/Form/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/Form/Form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/AppRouter/AppRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AppRouter.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/AppRouter/AppRouter.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AppRouter.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/AppRouter/AppRouter.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Teas/Teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Teas/Teas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/mutations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/queries.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/teas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/teas.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,9 +47,10 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../burger-builder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -97,6 +99,7 @@
       <workItem from="1567277715014" duration="36417000" />
       <workItem from="1567385166219" duration="4246000" />
       <workItem from="1567454400055" duration="1325000" />
+      <workItem from="1567641904581" duration="10188000" />
     </task>
     <servers />
   </component>
