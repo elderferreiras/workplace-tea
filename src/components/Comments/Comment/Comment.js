@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import {getDate} from "../../../helpers/utils";
 
 const comment = (props) => {
+    const author = props.author === 'administrator'? <b>{props.author}</b> : props.author;
     return (
         <Fragment>
             <div className="post-preview">
@@ -10,7 +11,7 @@ const comment = (props) => {
                 </h3>
                 <div className="row text-left">
                     <div className="col-12">
-                        <p className="post-meta">Posted by {props.author} on {getDate(props.date)}
+                        <p className="post-meta">Posted by {author} on {getDate(props.date)}
                         </p>
                     </div>
                 </div>
