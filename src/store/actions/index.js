@@ -7,7 +7,7 @@ export {
     isIPBlocked,
     blockIP,
     countUpVote,
-    countDownVote,
+    countDownVote
 } from './teas';
 
 export {

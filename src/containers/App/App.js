@@ -9,16 +9,17 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class App extends Component {
-    state = {
-        tea: {
-            content: "",
-            count: 0,
-            valid: false
-        }
-    };
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            tea: {
+                content: "",
+                count: 0,
+                valid: false
+            }
+        };
 
         window.onscroll = debounce(this.loadTeas, 100);
     }
@@ -26,7 +27,7 @@ class App extends Component {
     componentDidMount() {
         this.props.isIPBlocked();
 
-        if(!this.props.hasEverything) {
+        if(!this.props.hasEverything && !this.props.next) {
             this.props.fetchTeas();
         }
     }
