@@ -69,6 +69,10 @@ class Tea extends Component {
             return false
         }
 
+        if(/(.)\1{2,}/.test(content)) {
+            return false;
+        }
+
         if (this.props.tea.comments.items.findIndex(comment => content === comment.content) !== -1) {
             return false;
         }

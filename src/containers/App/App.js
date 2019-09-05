@@ -83,6 +83,10 @@ class App extends Component {
             return false;
         }
 
+        if(/(.)\1{2,}/.test(content)) {
+            return false;
+        }
+
         if(/[~`#$%\^&+=\-\[\]\\/{}|\\"<>\?]/g.test(content)) {
             return false
         }
