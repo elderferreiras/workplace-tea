@@ -32,17 +32,12 @@ class Tea extends Component {
                 const ip = res.data.ip;
 
                 if (this.isCommentValid(this.state.comment)) {
-                    if (this.props.tea.comments.items.findIndex(comment => ip === comment.ip) !== -1) {
-                        this.props.blockIP(ip);
-                    } else {
-
-                        this.props.createComment(
-                            this.state.comment,
-                            randomGenerator.generate().toLowerCase(),
-                            this.props.tea.id,
-                            ip
-                        );
-                    }
+                    this.props.createComment(
+                        this.state.comment,
+                        randomGenerator.generate().toLowerCase(),
+                        this.props.tea.id,
+                        ip
+                    );
                 } else {
                     this.props.blockIP(ip);
                 }
