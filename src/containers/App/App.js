@@ -67,10 +67,6 @@ class App extends Component {
     };
 
     isTeaValid = (content) => {
-        if(content.length < 20 || content.length > 250) {
-            return false;
-        }
-
         if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(content)) {
             return false;
         }
@@ -101,7 +97,7 @@ class App extends Component {
     teaChangeHandler = (event) => {
         let tea = {...this.state.tea};
 
-        tea.valid = this.isTeaValid(event.target.value);
+        tea.valid =  event.target.value.length >= 20 || event.target.value.length <= 250;
         tea.content = event.target.value;
         tea.count = event.target.value.length;
 

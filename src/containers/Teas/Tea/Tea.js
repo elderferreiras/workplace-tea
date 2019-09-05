@@ -81,7 +81,7 @@ class Tea extends Component {
     };
 
     changeCommentHandler = (event) => {
-        if(this.isCommentValid(event.target.value)) {
+        if(event.target.value.length > 0 && event.target.value.length <= 500) {
             this.setState({comment: event.target.value, valid: true});
         } else {
             this.setState({comment: event.target.value, valid: false});
