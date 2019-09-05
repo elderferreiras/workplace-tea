@@ -91,7 +91,7 @@ class App extends Component {
             return false;
         }
 
-        if(/[~`#$%\^&+=\-\[\]\\/{}|\\"<>\?]/g.test(content)) {
+        if(/[~`#$%\^&+=\-\[\]\\/{}|\\"<>]/g.test(content)) {
             return false
         }
 
