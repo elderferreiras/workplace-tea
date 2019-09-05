@@ -77,9 +77,14 @@ class App extends Component {
 
         let Filter = require('bad-words'),
             filter = new Filter();
+        filter.addWords('reddit', 'spilled', 'tea', 'script');
 
         if(filter.isProfane(content)) {
             return false;
+        }
+
+        if(/[~`#$%\^&+=\-\[\]\\/{}|\\"<>\?]/g.test(content)) {
+            return false
         }
 
         if (this.props.teas.findIndex(tea => content === tea.content) !== -1) {
