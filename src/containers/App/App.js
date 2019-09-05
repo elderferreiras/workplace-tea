@@ -105,7 +105,7 @@ class App extends Component {
     teaChangeHandler = (event) => {
         let tea = {...this.state.tea};
 
-        tea.valid =  event.target.value.length >= 20 || event.target.value.length <= 250;
+        tea.valid =  event.target.value.length >= 20 && event.target.value.length <= 250;
         tea.content = event.target.value;
         tea.count = event.target.value.length;
 
