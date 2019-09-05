@@ -5,7 +5,9 @@ export {
     fetchTeasFail,
     submitTea,
     isIPBlocked,
-    blockIP
+    blockIP,
+    countUpVote,
+    countDownVote,
 } from './teas';
 
 export {

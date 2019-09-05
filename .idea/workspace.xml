@@ -11,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Theme/Form/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/Form/Form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Theme/Voting/Voting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/Voting/Voting.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphql/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/mutations.js" afterDir="false" />
@@ -99,7 +100,7 @@
       <workItem from="1567277715014" duration="36417000" />
       <workItem from="1567385166219" duration="4246000" />
       <workItem from="1567454400055" duration="1325000" />
-      <workItem from="1567641904581" duration="10188000" />
+      <workItem from="1567641904581" duration="12332000" />
     </task>
     <servers />
   </component>

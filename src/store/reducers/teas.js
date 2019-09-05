@@ -72,6 +72,18 @@ const teasReducer = (state = initialState, action)  => {
                 ...state,
                 blocked: true
             };
+        case actionTypes.UPDATE_VOTE: {
+            const teas = [...state.teas];
+
+            const teaIndex = teas.findIndex(tea => tea.id === action.tea.id);
+
+            teas[teaIndex] = {...teas[teaIndex], up: action.tea.up, down: action.tea.down};
+
+            return {
+                ...state,
+                teas: teas
+            };
+        }
         default:
             return state;
     }

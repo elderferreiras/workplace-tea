@@ -4,6 +4,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {getBlockedIPs, getWorkplace} from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 import axios from "axios";
+
 const uuidv4 = require('uuid/v4');
 
 export const fetchTeasStart = () => {
@@ -106,7 +107,7 @@ export const isIPBlocked = () => {
     return (dispatch) => {
         axios.get('https://api.ipify.org/?format=json').then(res => {
             API.graphql(graphqlOperation(getBlockedIPs, {ip: res.data.ip})).then(res => {
-                if(res.data.getBlockedIPs && res.data.getBlockedIPs.id) {
+                if (res.data.getBlockedIPs && res.data.getBlockedIPs.id) {
                     dispatch(blockedIP());
                 }
             });
@@ -116,14 +117,73 @@ export const isIPBlocked = () => {
 
 export const blockIP = (ip) => {
     return (dispatch) => {
-        console.log(ip);
-        API.graphql(graphqlOperation(mutations.createBlockedIPs,  {
+        API.graphql(graphqlOperation(mutations.createBlockedIPs, {
             input: {
                 id: uuidv4(),
                 ip: ip
             }
         })).then(res => {
             dispatch(blockedIP());
+        });
+    };
+};
+
+export const updateVote = (id, tea) => {
+    return {
+        type: actionTypes.UPDATE_VOTE,
+        id: id,
+        tea: tea
+    };
+};
+
+export const countUpVote = (id, countUp, countDown) => {
+    return (dispatch) => {
+        if (sessionStorage.getItem(id) === 'up') {
+            sessionStorage.removeItem(id);
+            countUp--;
+        } else if (sessionStorage.getItem(id) === 'down') {
+            sessionStorage.setItem(id, 'up');
+            countUp++;
+            countDown--;
+        } else {
+            sessionStorage.setItem(id, 'up');
+            countUp++;
+        }
+
+        API.graphql(graphqlOperation(mutations.updateTea, {
+            input: {
+                id: id,
+                up: countUp,
+                down: countDown
+            }
+        })).then(res => {
+            dispatch(updateVote(id, res.data.updateTea));
+        });
+    };
+};
+
+export const countDownVote = (id, countUp, countDown) => {
+    return (dispatch) => {
+        if (sessionStorage.getItem(id) === 'down') {
+            sessionStorage.removeItem(id);
+            countDown--;
+        } else if (sessionStorage.getItem(id) === 'up') {
+            sessionStorage.setItem(id, 'down');
+            countUp--;
+            countDown++;
+        } else {
+            sessionStorage.setItem(id, 'down');
+            countDown++;
+        }
+
+        API.graphql(graphqlOperation(mutations.updateTea, {
+            input: {
+                id: id,
+                up: countUp,
+                down: countDown
+            }
+        })).then(res => {
+            dispatch(updateVote(id, res.data.updateTea));
         });
     };
 };
