@@ -12,6 +12,7 @@ export const onCreateWorkplace = `subscription OnCreateWorkplace {
         content
         up
         down
+        ip
         createdAt
       }
       nextToken
@@ -30,6 +31,7 @@ export const onUpdateWorkplace = `subscription OnUpdateWorkplace {
         content
         up
         down
+        ip
         createdAt
       }
       nextToken
@@ -48,6 +50,7 @@ export const onDeleteWorkplace = `subscription OnDeleteWorkplace {
         content
         up
         down
+        ip
         createdAt
       }
       nextToken
@@ -61,6 +64,7 @@ export const onCreateTea = `subscription OnCreateTea {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -75,6 +79,7 @@ export const onCreateTea = `subscription OnCreateTea {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -88,6 +93,7 @@ export const onUpdateTea = `subscription OnUpdateTea {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -102,6 +108,7 @@ export const onUpdateTea = `subscription OnUpdateTea {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -115,6 +122,7 @@ export const onDeleteTea = `subscription OnDeleteTea {
     content
     up
     down
+    ip
     createdAt
     workplace {
       id
@@ -129,6 +137,7 @@ export const onDeleteTea = `subscription OnDeleteTea {
         id
         content
         author
+        ip
         createdAt
       }
       nextToken
@@ -141,12 +150,14 @@ export const onCreateComment = `subscription OnCreateComment {
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -165,12 +176,14 @@ export const onUpdateComment = `subscription OnUpdateComment {
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -189,12 +202,14 @@ export const onDeleteComment = `subscription OnDeleteComment {
     id
     content
     author
+    ip
     createdAt
     tea {
       id
       content
       up
       down
+      ip
       createdAt
       workplace {
         id
@@ -205,6 +220,27 @@ export const onDeleteComment = `subscription OnDeleteComment {
         nextToken
       }
     }
+  }
+}
+`;
+export const onCreateBlockedIPs = `subscription OnCreateBlockedIPs {
+  onCreateBlockedIPs {
+    id
+    ip
+  }
+}
+`;
+export const onUpdateBlockedIPs = `subscription OnUpdateBlockedIPs {
+  onUpdateBlockedIPs {
+    id
+    ip
+  }
+}
+`;
+export const onDeleteBlockedIPs = `subscription OnDeleteBlockedIPs {
+  onDeleteBlockedIPs {
+    id
+    ip
   }
 }
 `;

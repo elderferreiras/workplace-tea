@@ -17,6 +17,7 @@ const commentsSection = (props) => {
                         submit={props.submit}
                         changed={props.changed}
                         submitting={props.submitting}
+                        valid={props.valid}
                     />
                 </div>
             </div>

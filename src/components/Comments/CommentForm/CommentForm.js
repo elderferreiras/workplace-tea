@@ -2,6 +2,8 @@ import React from 'react';
 import {Spinner} from 'react-bootstrap';
 
 const commentForm = (props) => {
+    const disabled = props.valid? '' : 'disabled';
+
     return (
         <div className="row">
 
@@ -25,7 +27,7 @@ const commentForm = (props) => {
                         <br/>
                         <div className="form-group">
                             <button type="submit" className="btn btn-primary"
-                                    id="sendMessageButton">Submit
+                                    id="sendMessageButton" disabled={disabled}>Submit
                             </button>
                         </div>
                     </form>

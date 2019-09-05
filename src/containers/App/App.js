@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import TeaForm from '../../components/Theme/TeaForm/TeaForm';
 import Teas from '../Teas/Teas';
 import Layout from '../../hoc/Layout';
-import {API, graphqlOperation} from 'aws-amplify';
-import * as mutations from '../../graphql/mutations';
-import {getWorkplace} from '../../graphql/queries';
 import Spinner from '../../components/Theme/Spinner/Spinner';
-import {getWorkplaceId} from "../../helpers/utils";
-import debounce from "lodash.debounce";
+import debounce from 'lodash.debounce';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 class App extends Component {
+
     constructor(props) {
         super(props);
 
@@ -17,165 +17,132 @@ class App extends Component {
             tea: {
                 content: "",
                 count: 0,
-            },
-            items: [],
-            nextToken: null,
-            previousToken: null,
-            isLoading: false,
-            noMore: false,
-            initialLoading: false
+                valid: false
+            }
         };
 
-        window.onscroll = debounce(this.lazyLoad, 100);
+        window.onscroll = debounce(this.loadTeas, 100);
     }
 
-    lazyLoad = () => {
+    componentDidMount() {
+        this.props.isIPBlocked();
 
-        if (this.state.isLoading || !this.state.nextToken) {
-            return;
+        if(!this.props.hasEverything && !this.props.next) {
+            this.props.fetchTeas();
         }
+    }
 
-        if (
-            (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 200
-        ) {
-            if (this.state.nextToken !== this.state.previousToken) {
-                this.setState({isLoading: true});
-                this.listTeas();
+    loadTeas = () => {
+        if (this.props.loading || this.props.starting || this.props.next === null) return;
+
+        const height = window.innerHeight + window.pageYOffset;
+
+        if ((height) >= document.body.offsetHeight - 200) {
+            if (this.props.next !== this.props.previous) {
+               this.props.fetchTeas();
             }
         }
     };
-
-    componentDidMount() {
-        this.setState({initialLoading: true});
-        this.listTeas();
-    }
 
     teaSubmitHandler = (event) => {
         event.preventDefault();
 
         if (this.state.tea.content.length) {
-            this.setState({
-                tea: {content: "", count: 0},
-                nextToken: null,
-                previousToken: null,
-                noMore: false,
-                isLoading: false
-            });
+            axios.get('https://api.ipify.org/?format=json').then(res => {
+                const ip = res.data.ip;
 
-            API.graphql(graphqlOperation(mutations.createTea, {
-                input: {
-                    content: this.state.tea.content,
-                    teaWorkplaceId: getWorkplaceId()
+                if (this.isTeaValid(this.state.tea.content)) {
+                    this.props.saveTea(this.state.tea.content, res.data.ip);
+                } else {
+                    this.props.blockIP(ip);
                 }
-            })).finally(res => {
-                this.listTeas(true);
+            }).finally(res => {
+                this.setState({
+                    tea: {
+                        content: "", count: 0, valid: false
+                    }
+                });
             });
         }
+    };
+
+    isTeaValid = (content) => {
+        if(content.length < 20 || content.length > 250) {
+            return false;
+        }
+
+        if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(content)) {
+            return false;
+        }
+
+        let Filter = require('bad-words'),
+            filter = new Filter();
+
+        if(filter.isProfane(content)) {
+            return false;
+        }
+
+        if (this.props.teas.findIndex(tea => content === tea.content) !== -1) {
+            return false;
+        }
+
+        return true;
     };
 
     teaChangeHandler = (event) => {
-        this.setState({tea: {content: event.target.value, count: event.target.value.length}});
-    };
+        let tea = {...this.state.tea};
 
-    listTeas = (refresh) => {
-        let variables = {id: getWorkplaceId(), sortDirection: 'DESC', limit: 10};
+        tea.valid = this.isTeaValid(event.target.value);
+        tea.content = event.target.value;
+        tea.count = event.target.value.length;
 
-        if (refresh === undefined && this.state.nextToken) {
-            variables.nextToken = this.state.nextToken;
-        }
-
-        API.graphql(graphqlOperation(getWorkplace, variables)).then(res => {
-            const currentTeas = this.state.items;
-            const teas = res.data.getWorkplace.teas;
-            const previousToken = refresh === undefined ? this.state.nextToken : null;
-
-            if (teas.items.length) {
-                const newItems = refresh === undefined ? currentTeas.concat(teas.items) : teas.items;
-
-                this.setState({
-                    items: newItems
-                });
-            } else {
-                const newItems = refresh === undefined ? currentTeas : teas.items;
-
-                this.setState({
-                    items: newItems
-                });
-            }
-
-
-            this.setState({
-                isLoading: false,
-                initialLoading: false,
-                nextToken: teas.nextToken,
-                previousToken: previousToken
-            });
-
-            if (refresh === undefined && previousToken && !res.data.getWorkplace.teas.nextToken) {
-                this.setState({noMore: true});
-            }
+        this.setState({
+            tea: tea
         });
-    };
-
-    upHandler = (id, action, downAction) => {
-        const up = this.getValue('up', id, action);
-        const down = this.getValue('down', id, downAction);
-
-        API.graphql(graphqlOperation(mutations.updateTea, {input: {id: id, up: up, down: down}})).then(res => {
-            this.handleVotingResponse(res);
-        });
-    };
-
-    downHandler = (id, action, upAction) => {
-        const down = this.getValue('down', id, action);
-        const up = this.getValue('up', id, upAction);
-
-        API.graphql(graphqlOperation(mutations.updateTea, {input: {id: id, up: up, down: down}})).then(res => {
-            this.handleVotingResponse(res);
-        });
-    };
-
-    handleVotingResponse = (res) => {
-        const currentTea = [...this.state.items];
-
-        const teaIndex = currentTea.findIndex(tea => tea.id === res.data.updateTea.id);
-
-        currentTea[teaIndex] = {...currentTea[teaIndex], up: res.data.updateTea.up, down: res.data.updateTea.down};
-
-        this.setState({items: currentTea});
-    };
-
-    nextHandler = () => {
-        this.listTeas();
-    };
-
-    getValue = (dir, id, action) => {
-        let value = parseFloat(document.querySelector("[data-id='" + id + "'][data-thumbs=" + dir + "]").dataset.value);
-
-        if (action === 'SUBTRACT') {
-            value -= 1;
-        } else if (action === 'ADD') {
-            value += 1;
-        }
-
-        return value;
     };
 
     render() {
-        return (
-            <Layout>
-                <TeaForm submit={this.teaSubmitHandler} tea={this.state.tea} changed={this.teaChangeHandler}/>
-                {this.state.items && !this.state.initialLoading ? <Teas
-                    items={this.state.items}
-                    upHandler={this.upHandler}
-                    downHandler={this.downHandler}
-                    next={this.nextHandler}
-                    isLoading={this.state.isLoading}
-                    noMore={this.state.noMore}
-                /> : <Spinner/>}
-            </Layout>
-        );
+        let teas = <Spinner/>;
+
+        if(this.props.teas && !this.props.starting) {
+            teas = <Teas teas={this.props.teas}
+                         loading={this.props.loading}
+                         hasEverything={this.props.hasEverything} />;
+        }
+
+       if(this.props.blocked) {
+           return <p>Sorry, mate. You've been banned.</p>;
+       } else {
+           return  <Layout>
+                       <TeaForm
+                           tea={this.state.tea}
+                           onSubmit={this.teaSubmitHandler}
+                           onChange={this.teaChangeHandler}/>
+                       {teas}
+                </Layout>
+       }
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      teas: state.teasReducer.teas,
+      starting: state.teasReducer.starting,
+      next: state.teasReducer.next,
+      previous: state.teasReducer.previous,
+      loading: state.teasReducer.loading,
+      hasEverything: state.teasReducer.hasEverything,
+      blocked: state.teasReducer.blocked
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchTeas: (init) => dispatch(actions.fetchTeas(init)),
+        saveTea: (content, ip) => dispatch(actions.submitTea(content, ip)),
+        isIPBlocked: () => dispatch(actions.isIPBlocked()),
+        blockIP: (ip) => dispatch(actions.blockIP(ip))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
