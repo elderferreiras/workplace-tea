@@ -6,7 +6,7 @@ const form = (props) => {
 
     return (
         <Form onSubmit={props.submit}>
-            <Form.Group controlId="exampleForm.ControlTextarea">
+            <Form.Group controlId="exampleForm.ControlTextarea" className="mb-0">
                 <Form.Label style={{fontSize: '3rem'}} className="tea-label">Ready to spill the tea?</Form.Label>
                 <Form.Control
                     as="textarea"
@@ -17,6 +17,7 @@ const form = (props) => {
                     style={{fontSize: '1.2rem'}}
                     onChange={props.changed}/>
             </Form.Group>
+            <p className="mb-0 mt-0 ml-0 mr-0 text-left" style={{fontSize: '12px'}}>No hate speech will be tolerated.</p>
             <Row>
                 <div className="text-left col-6">
                     <span>{props.tea.count}/250</span>
