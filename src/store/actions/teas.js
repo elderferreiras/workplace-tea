@@ -4,8 +4,9 @@ import {API, graphqlOperation} from "aws-amplify";
 import {getBlockedIPs, getWorkplace} from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 import axios from "axios";
-
+import * as voting from './voting';
 const uuidv4 = require('uuid/v4');
+
 
 export const fetchTeasStart = () => {
     return {
@@ -138,15 +139,18 @@ export const updateVote = (id, tea) => {
 
 export const countUpVote = (id, countUp, countDown) => {
     return (dispatch) => {
-        if (sessionStorage.getItem(id) === 'up') {
-            sessionStorage.removeItem(id);
+        const key = `CognitoIdentityServiceProvider#${id}`;
+        const vote = localStorage.getItem(key);
+
+        if (vote === voting.UP) {
+            localStorage.removeItem(key);
             countUp--;
-        } else if (sessionStorage.getItem(id) === 'down') {
-            sessionStorage.setItem(id, 'up');
+        } else if (vote === voting.DOWN) {
+            localStorage.setItem(key, voting.UP);
             countUp++;
             countDown--;
         } else {
-            sessionStorage.setItem(id, 'up');
+            localStorage.setItem(key, voting.DOWN);
             countUp++;
         }
 
@@ -164,26 +168,53 @@ export const countUpVote = (id, countUp, countDown) => {
 
 export const countDownVote = (id, countUp, countDown) => {
     return (dispatch) => {
-        if (sessionStorage.getItem(id) === 'down') {
-            sessionStorage.removeItem(id);
+        const key = `CognitoIdentityServiceProvider#${id}`;
+        const vote = localStorage.getItem(key);
+
+        if (vote === voting.DOWN) {
+            localStorage.removeItem(key);
             countDown--;
-        } else if (sessionStorage.getItem(id) === 'up') {
-            sessionStorage.setItem(id, 'down');
+        } else if (vote === voting.UP) {
+            localStorage.setItem(key, voting.DOWN);
             countUp--;
             countDown++;
         } else {
-            sessionStorage.setItem(id, 'down');
+            localStorage.setItem(key, voting.DOWN);
             countDown++;
         }
 
         API.graphql(graphqlOperation(mutations.updateTea, {
             input: {
                 id: id,
-                up: countUp,
-                down: countDown
+                up: countUp < 0 ? 0 : countUp,
+                down: countDown < 0 ? 0 : countDown
             }
         })).then(res => {
             dispatch(updateVote(id, res.data.updateTea));
         });
     };
+};
+
+export const loadFakeTea = (tea) => {
+    return {
+        tea: tea,
+        type: actionTypes.LOAD_FAKE_TEA
+    }
+};
+
+export const loadInappropriateTea = (content) => {
+    return (dispatch) => {
+        dispatch(loadFakeTea({
+                id: uuidv4(),
+                content: content,
+                createdAt: '2019-09-06T02:11:16.789Z',
+                up: 0,
+                down: 0,
+                ip: null,
+                comments: {
+                    items: []
+                }
+            }
+        ));
+    }
 };

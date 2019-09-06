@@ -17,7 +17,7 @@ const form = (props) => {
                     style={{fontSize: '1.2rem'}}
                     onChange={props.changed}/>
             </Form.Group>
-            <p className="mb-0 mt-0 ml-0 mr-0 text-left" style={{fontSize: '12px'}}>No hate speech will be tolerated.</p>
+            <p className="mb-0 mt-0 ml-0 mr-0 text-left" style={{fontSize: '12px'}}>Hate speech is not tolerated on Workplace Tea.</p>
             <Row>
                 <div className="text-left col-6">
                     <span>{props.tea.count}/250</span>

@@ -1,0 +1,2 @@
+export const UP = 'dGhpc0lzQW5VcFZvdGVGb3JBblNwZWNpZmljVGVhVGhhdFdhc1Vwdm90ZWRJblRoZUhvbWVQYWdl';
+export const DOWN = 'dGhpc0lzQURvd25Wb3RlRm9yQW5TcGVjaWZpY1RlYVRoYXRXYXNEb3duVm90ZWRJblRoZUhvbWVQYWdl';

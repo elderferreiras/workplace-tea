@@ -7,6 +7,7 @@ import debounce from 'lodash.debounce';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {validate} from "../../utility/validation";
 
 class App extends Component {
 
@@ -48,64 +49,44 @@ class App extends Component {
         event.preventDefault();
 
         if (this.state.tea.content.length) {
-            axios.get('https://api.ipify.org/?format=json').then(res => {
-                const ip = res.data.ip;
-
-                if (this.isTeaValid(this.state.tea.content)) {
-                    if (this.props.teas.findIndex(tea => ip === tea.ip) !== -1) {
-                        this.props.blockIP(ip);
-                    } else {
+            if (this.isTeaValid(this.state.tea.content)) {
+                axios.get('https://api.ipify.org/?format=json').then(res => {
                         this.props.saveTea(this.state.tea.content, res.data.ip);
-                    }
-                } else {
-                    this.props.blockIP(ip);
-                }
-            }).finally(res => {
+                }).finally(res => {
+                    this.setState({
+                        tea: {
+                            content: "", count: 0, valid: false
+                        }
+                    });
+                });
+            } else {
+                this.props.loadInappropriateTea(this.state.tea.content);
                 this.setState({
                     tea: {
                         content: "", count: 0, valid: false
                     }
                 });
-            });
+            }
         }
     };
 
     isTeaValid = (content) => {
-        if(content.length < 20 || content.length > 250) {
-            return false;
-        }
-
-        if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(content)) {
-            return false;
-        }
-
-        let Filter = require('bad-words'),
-            filter = new Filter();
-        filter.addWords('reddit', 'spilled', 'tea', 'hate speech', 'script', 'farts', 'fart', 'lorem', 'ipsum', 'fück', 'hitler', 'jews', 'jewish');
-
-        if(filter.isProfane(content)) {
-            return false;
-        }
-
-        if(/(.)\1{2,}/.test(content)) {
-            return false;
-        }
-
-        if(/[~`#$%\^&+=\-\[\]\\/{}|\\"<>]/g.test(content)) {
-            return false
-        }
-
-        if (this.props.teas.findIndex(tea => content === tea.content) !== -1) {
-            return false;
-        }
-
-        return true;
+        return validate(content, {
+            minLength: 0,
+            maxLength: 250,
+            profanity: true,
+            whiteSpace: true,
+            singleWord: true,
+            consecutive: true,
+            specialCharacters: true,
+            teas: this.props.teas
+        });
     };
 
     teaChangeHandler = (event) => {
         let tea = {...this.state.tea};
 
-        tea.valid =  event.target.value.length >= 20 && event.target.value.length <= 250;
+        tea.valid =  event.target.value.length >= 0 && event.target.value.length <= 250;
         tea.content = event.target.value;
         tea.count = event.target.value.length;
 
@@ -154,7 +135,8 @@ const mapDispatchToProps = dispatch => {
         fetchTeas: (init) => dispatch(actions.fetchTeas(init)),
         saveTea: (content, ip) => dispatch(actions.submitTea(content, ip)),
         isIPBlocked: () => dispatch(actions.isIPBlocked()),
-        blockIP: (ip) => dispatch(actions.blockIP(ip))
+        blockIP: (ip) => dispatch(actions.blockIP(ip)),
+        loadInappropriateTea: (content) => dispatch(actions.loadInappropriateTea(content))
     }
 };
 

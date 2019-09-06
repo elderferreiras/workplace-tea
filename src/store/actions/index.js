@@ -7,10 +7,17 @@ export {
     isIPBlocked,
     blockIP,
     countUpVote,
-    countDownVote
+    countDownVote,
+    loadInappropriateTea
 } from './teas';
 
 export {
     fetchTea,
-    createComment
+    createComment,
+    loadInappropriateComment
 } from './tea';
+
+export {
+    UP,
+    DOWN
+} from './voting';

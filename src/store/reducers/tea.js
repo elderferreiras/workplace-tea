@@ -32,6 +32,11 @@ const teaReducer = (state = initialState, action) => {
                 loading: false,
                 tea: action.tea
             };
+        case actionTypes.LOAD_FAKE_COMMENT:
+            return {
+                ...state,
+                tea: action.tea
+            };
         default:
             return state;
     }

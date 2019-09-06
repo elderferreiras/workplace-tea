@@ -72,6 +72,15 @@ const teasReducer = (state = initialState, action)  => {
                 ...state,
                 blocked: true
             };
+        case actionTypes.LOAD_FAKE_TEA: {
+            const currentTeas = [...state.teas];
+            currentTeas.unshift(action.tea);
+
+            return {
+                ...state,
+                teas: currentTeas
+            };
+        }
         case actionTypes.UPDATE_VOTE: {
             const teas = [...state.teas];
 
