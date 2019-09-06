@@ -1,7 +1,7 @@
 const filter = () => {
     let Filter = require('bad-words'),
         filter = new Filter();
-    filter.addWords('reddit', 'lorem', 'ipsum', 'spilled', 'tea', 'hate speech', 'script', 'farts', 'fart', 'lorem', 'ipsum', 'fück', 'hitler', 'jews', 'jewish', 'cüm', 'cünt');
+    filter.addWords('ssr','reddit', 'lorem', 'ipsum', 'spilled','hate speech', 'script', 'farts', 'fart', 'lorem', 'ipsum', 'fück', 'hitler', 'jews', 'jewish', 'cüm', 'cünt');
     return filter;
 };
 
@@ -57,4 +57,24 @@ export const validate = (content, params) => {
     }
 
     return true;
+};
+
+export const updateObject = (oldObject, updatedProperties = {}) => {
+    return {
+        ...oldObject,
+        ...updatedProperties
+    };
+};
+
+const hasVoted = (id, dir) => {
+    const vote = localStorage.getItem(`CognitoIdentityServiceProvider#${id}`);
+    if (vote) {
+        return vote === dir;
+    } else {
+        return false;
+    }
+};
+
+export const checkVote = (id, dir) => {
+    return hasVoted(id, dir)? ' selected' : ''
 };

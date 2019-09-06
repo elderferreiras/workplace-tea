@@ -1,5 +1,5 @@
 import React, {Fragment, Component} from 'react';
-import Voting from '../../Theme/Voting/Voting';
+import Voting from '../../Voting/Voting';
 import {Link} from "react-router-dom";
 import {getDate} from "../../../helpers/utils";
 

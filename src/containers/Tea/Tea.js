@@ -1,15 +1,15 @@
 import React, {Component, Fragment} from 'react';
-import Layout from '../../../hoc/Layout';
-import Header from '../../../hoc/Header';
-import TeaBackground from '../../../assets/images/background.png'
-import CommentsSection from '../../../components/Comments/CommentSection/CommentsSection';
-import {getDate} from '../../../helpers/utils';
-import Spinner from '../../../components/Theme/Spinner/Spinner';
+import Layout from '../../hoc/Layout';
+import Header from '../../hoc/Header';
+import TeaBackground from '../../assets/images/background.png'
+import CommentsSection from '../../components/Comments/CommentSection/CommentsSection';
+import {getDate} from '../../helpers/utils';
+import Spinner from '../../components/Theme/Spinner/Spinner';
 import randomGenerator from 'random-username-generator';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/index';
+import * as actions from '../../store/actions';
 import axios from "axios";
-import {validate} from "../../../utility/validation";
+import {validate} from "../../utility/utility";
 
 class Tea extends Component {
     state = {
@@ -36,7 +36,6 @@ class Tea extends Component {
                         this.props.tea.id,
                         res.data.ip
                     );
-
                 }).finally(res => {
                     this.setState({comment: "", submittingComment: false, valid: false});
                 });

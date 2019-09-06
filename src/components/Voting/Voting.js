@@ -1,20 +1,8 @@
 import React, {Fragment} from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../../store/actions/index';
-import * as votingType from '../../../store/actions/voting';
-
-const hasVoted = (id, dir) => {
-    const vote = localStorage.getItem(`CognitoIdentityServiceProvider#${id}`);
-    if (vote) {
-        return vote === dir;
-    } else {
-        return false;
-    }
-};
-
-const checkVote = (id, dir) => {
-    return hasVoted(id, dir)? ' selected' : ''
-};
+import * as actions from '../../store/actions';
+import * as votingType from '../../store/actions/voting';
+import { checkVote } from '../../utility/utility';
 
 const voting = (props) => {
     return (
