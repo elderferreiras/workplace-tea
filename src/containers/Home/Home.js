@@ -51,23 +51,33 @@ class Home extends Component {
         if (this.state.tea.content.length) {
             if (this.isTeaValid(this.state.tea.content)) {
                 axios.get('https://api.ipify.org/?format=json').then(res => {
+                    if(res.data.ip.length) {
                         this.props.saveTea(this.state.tea.content, res.data.ip);
+                    } else {
+                        this.loadFakeTea();
+                    }
                 }).finally(res => {
                     this.setState({
                         tea: {
                             content: "", count: 0, valid: false
                         }
                     });
+                }).catch(err => {
+                    this.props.saveTea(this.state.tea.content);
                 });
             } else {
-                this.props.loadInappropriateTea(this.state.tea.content);
-                this.setState({
-                    tea: {
-                        content: "", count: 0, valid: false
-                    }
-                });
+                this.loadFakeTea();
             }
         }
+    };
+
+    loadFakeTea = () => {
+        this.props.loadInappropriateTea(this.state.tea.content);
+        this.setState({
+            tea: {
+                content: "", count: 0, valid: false
+            }
+        });
     };
 
     isTeaValid = (content) => {

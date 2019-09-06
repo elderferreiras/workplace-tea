@@ -79,16 +79,19 @@ export const createTeaStart = () => {
     }
 };
 
-export const submitTea = (content, ip) => {
+export const submitTea = (content, ip = null) => {
     return (dispatch) => {
         dispatch(createTeaStart());
         const data = {
             input: {
                 content: content,
-                ip: ip,
                 teaWorkplaceId: getWorkplaceId()
             }
         };
+
+        if(ip) {
+            data.input.ip = ip;
+        }
 
         API.graphql(graphqlOperation(mutations.createTea, data)).then(res => {
             dispatch(createTeaSuccess(res.data.createTea));

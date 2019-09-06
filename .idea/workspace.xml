@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/containers/App/App.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AppRouter/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AppRouter/AppRouter.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teas/Teas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AppRouter/AppRouter.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Teas/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Tea/Tea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Teas/Teas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/tea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/teas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Tea/Tea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/tea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/teas.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,11 +45,11 @@
       <recent name="$PROJECT_DIR$/src/assets/style" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/containers/Tea" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
       <recent name="$PROJECT_DIR$/src/containers/AppRouter" />
       <recent name="$PROJECT_DIR$/src/components/Theme/Spinner" />
-      <recent name="$PROJECT_DIR$/src/containers" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -105,7 +97,7 @@
       <workItem from="1567385166219" duration="4246000" />
       <workItem from="1567454400055" duration="1325000" />
       <workItem from="1567641904581" duration="12429000" />
-      <workItem from="1567656793081" duration="22862000" />
+      <workItem from="1567656793081" duration="24501000" />
     </task>
     <servers />
   </component>

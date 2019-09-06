@@ -43,16 +43,22 @@ export const createCommentSuccess = (tea) => {
     };
 };
 
-export const createComment = (content, author, teaId, ip) => {
+export const createComment = (content, author, teaId, ip = null) => {
     return (dispatch) => {
-        API.graphql(graphqlOperation(mutations.createComment, {
+        const data = {
             input: {
                 content: content,
                 author: author,
                 commentTeaId: teaId,
                 ip: ip
             }
-        })).then(res => {
+        };
+
+        if (ip) {
+            data.input.ip = ip;
+        }
+
+        API.graphql(graphqlOperation(mutations.createComment, data)).then(res => {
             dispatch(createCommentSuccess(res.data.createComment.tea));
         });
     }

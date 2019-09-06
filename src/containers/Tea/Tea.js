@@ -30,21 +30,35 @@ class Tea extends Component {
             this.setState({submittingComment: true});
             if (this.isCommentValid(this.state.comment)) {
                 axios.get('https://api.ipify.org/?format=json').then(res => {
-                    this.props.createComment(
-                        this.state.comment,
-                        randomGenerator.generate().toLowerCase(),
-                        this.props.tea.id,
-                        res.data.ip
-                    );
+                    if(res.data.ip.length) {
+                        this.createComment(res.data.ip);
+                    } else {
+                        this.loadFakeComment();
+                    }
                 }).finally(res => {
                     this.setState({comment: "", submittingComment: false, valid: false});
+                }).catch(err => {
+                    this.createComment();
                 });
             } else {
-                this.props.loadInappropriateComment(this.state.comment, this.props.tea, randomGenerator.generate().toLowerCase());
-                this.setState({comment: "", submittingComment: false, valid: false});
+               this.loadFakeComment();
             }
 
         }
+    };
+
+    createComment = (ip = null) => {
+        this.props.createComment(
+            this.state.comment,
+            randomGenerator.generate().toLowerCase(),
+            this.props.tea.id,
+            ip
+        );
+    };
+
+    loadFakeComment = () => {
+        this.props.loadInappropriateComment(this.state.comment, this.props.tea, randomGenerator.generate().toLowerCase());
+        this.setState({comment: "", submittingComment: false, valid: false});
     };
 
     isCommentValid = (content) => {
