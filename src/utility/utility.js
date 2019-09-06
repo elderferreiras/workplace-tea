@@ -39,16 +39,23 @@ export const validate = (content, params) => {
     }
 
     //Check for consecutive characters, such as "aaa".
-    if(params.consecutive && /([a-zA-Z])\1{2,}/.test(content)) {
+    if(params.consecutive && /([a-zA-Z])\1{2,}/g.test(content)) {
         return false;
     }
-    //Check for special characters.
-    if(params.specialCharacters && /[~`#$%^&+=\-\[\]\\/{}|"<>]/g.test(content)) {
+    //Check for some special characters.
+    if(params.specialCharacters && /[~`#$%^&+=\-\[\]{}|"<>]/g.test(content)) {
         return false
     }
 
     //Check if there's not another tea with the same content
     if (params.teas && params.teas.findIndex(tea => content === tea.content) !== -1) {
+        return false;
+    }
+
+    //Ban non ASCII characters
+    const ascii = /^[ -~]+$/g;
+
+    if (params.ascii && !ascii.test( content )) {
         return false;
     }
 

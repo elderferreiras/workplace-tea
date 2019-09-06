@@ -66,6 +66,7 @@ class Tea extends Component {
             empty: true,
             profanity: true,
             consecutive: true,
+            ascii: true,
             tea: this.props.tea
         });
     };

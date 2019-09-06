@@ -160,8 +160,8 @@ export const countUpVote = (id, countUp, countDown) => {
         API.graphql(graphqlOperation(mutations.updateTea, {
             input: {
                 id: id,
-                up: countUp,
-                down: countDown
+                up: countUp < 0 ? 0 : countUp,
+                down: countDown < 0 ? 0 : countDown
             }
         })).then(res => {
             dispatch(updateVote(id, res.data.updateTea));

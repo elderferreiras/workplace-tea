@@ -89,6 +89,7 @@ class Home extends Component {
             singleWord: true,
             consecutive: true,
             specialCharacters: true,
+            ascii: true,
             teas: this.props.teas
         });
     };
