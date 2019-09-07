@@ -5,8 +5,8 @@ import {getBlockedIPs, getWorkplace} from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 import axios from "axios";
 import * as voting from './voting';
+import {postTweet} from "../../services/twitter";
 const uuidv4 = require('uuid/v4');
-
 
 export const fetchTeasStart = () => {
     return {
@@ -94,6 +94,7 @@ export const submitTea = (content, ip = null) => {
         }
 
         API.graphql(graphqlOperation(mutations.createTea, data)).then(res => {
+            postTweet(content, res.data.createTea.id);
             dispatch(createTeaSuccess(res.data.createTea));
         }).catch(err => {
             dispatch(createTeaError(err));

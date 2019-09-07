@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/services/twitter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Tea/Tea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/actions/teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/teas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/utility.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +32,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../burger-builder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -97,7 +95,9 @@
       <workItem from="1567385166219" duration="4246000" />
       <workItem from="1567454400055" duration="1325000" />
       <workItem from="1567641904581" duration="12429000" />
-      <workItem from="1567656793081" duration="26177000" />
+      <workItem from="1567656793081" duration="28177000" />
+      <workItem from="1567816707559" duration="465000" />
+      <workItem from="1567822982600" duration="2450000" />
     </task>
     <servers />
   </component>
