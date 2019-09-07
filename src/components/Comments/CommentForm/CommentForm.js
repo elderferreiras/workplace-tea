@@ -22,7 +22,7 @@ class CommentForm extends Component {
 
     getGIFs = (term) => {
         if(term.length > 0) {
-            axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&api_key=zXXCerj107LK03q2wzA0vuN3MQvIi5iH`).then(res => {
+            axios.get(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=zXXCerj107LK03q2wzA0vuN3MQvIi5iH`).then(res => {
                 if (res.data.data && res.data.data.length <= 0) {
                     this.setState({gifs: []})
                 } else if (res.data.data && res.data.data.length >= 10) {
