@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react';
 import {getDate} from "../../../helpers/utils";
+import ReactHtmlParser from 'react-html-parser';
+import './Comment.scss';
 
 const comment = (props) => {
     const author = props.author === 'administrator'? <b>{props.author}</b> : props.author;
     return (
         <Fragment>
-            <div className="post-preview">
+            <div className="post-preview Comment">
                 <h3 className="post-subtitle">
-                  {props.comment}
+                  {ReactHtmlParser(props.comment)}
                 </h3>
                 <div className="row text-left">
                     <div className="col-12">

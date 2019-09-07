@@ -3,8 +3,8 @@ import {updateObject} from "../../utility/utility";
 
 const initialState = {
     tea: null,
-    error: null,
-    loading: false
+    loading: false,
+    error: null
 };
 
 const teaReducer = (state = initialState, action) => {
@@ -15,8 +15,12 @@ const teaReducer = (state = initialState, action) => {
             return fetchTeaSuccess(state, action);
         case actionTypes.FETCH_TEA_FAIL:
             return fetchTeaFail(state, action);
+        case actionTypes.CREATE_COMMENT_START:
+            return createCommentStart(state, action);
         case actionTypes.CREATE_COMMENT_SUCCESS:
             return createCommentSuccess(state, action);
+        case actionTypes.CREATE_COMMENT_FAIL:
+            return createCommentFail(state, action);
         case actionTypes.LOAD_FAKE_COMMENT:
             return loadFakeComment(state, action);
         default:
@@ -26,35 +30,58 @@ const teaReducer = (state = initialState, action) => {
 
 const fetchTeaStart = (state) => {
     return updateObject(state, {
-        loading: true
+        loading: true,
+        error: null
     });
 };
 
 const fetchTeaSuccess = (state, action) => {
     return updateObject(state, {
         tea: action.tea,
-        loading: false
+        loading: false,
+        loadingComment: false,
+        error: null
     });
 };
 
 const fetchTeaFail = (state, action) => {
     return updateObject(state, {
-        error: action.error,
-        loading: false
+        loading: false,
+        loadingComment: false,
+        error: action.error
     });
 };
 
+const createCommentStart = (state, action) => {
+    return updateObject(state, {
+        loadingComment: true,
+        loading: false,
+        error: null
+    });
+};
 const createCommentSuccess = (state, action) => {
     return updateObject(state, {
-        error: action.error,
+        tea: action.tea,
+        loadingComment: false,
         loading: false,
-        tea: action.tea
+        error: null
+    });
+};
+
+const createCommentFail = (state, action) => {
+    return updateObject(state, {
+        loading: false,
+        loadingComment: false,
+        error: action.error
     });
 };
 
 const loadFakeComment = (state, action) => {
     return updateObject(state, {
-        tea: action.tea
+        tea: action.tea,
+        loading: false,
+        loadingComment: false,
+        error: null
     });
 };
 

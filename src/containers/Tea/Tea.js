@@ -9,8 +9,9 @@ import randomGenerator from 'random-username-generator';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions';
 import axios from "axios";
-import {checkVote, validate} from "../../utility/utility";
-import * as votingType from "../../store/actions/voting";
+import {validate} from "../../utility/utility";
+import Error from '../../components/Theme/Error/Error';
+import TakeMeAway from "../../components/Theme/TakeMeAway/TakeMeAway";
 
 class Tea extends Component {
     state = {
@@ -26,7 +27,6 @@ class Tea extends Component {
 
     submitCommentHandler = (event) => {
         event.preventDefault();
-
         if (this.state.comment.length) {
             this.setState({submittingComment: true});
             if (this.isCommentValid(this.state.comment)) {
@@ -48,9 +48,21 @@ class Tea extends Component {
         }
     };
 
-    createComment = (ip = null) => {
+    submitGIFCommentHandler = (url) => {
+        const content = `<img src="${url}" class="comment-gif"/>`;
+
+        this.setState({submittingComment: true});
+
+        axios.get('https://api.ipify.org/?format=json').then(res => {
+            this.createComment(res.data.ip, content);
+        }).finally(res => {
+            this.setState({comment: "", submittingComment: false, valid: false});
+        });
+    };
+
+    createComment = (ip = null, content = this.state.comment) => {
         this.props.createComment(
-            this.state.comment,
+            content,
             randomGenerator.generate().toLowerCase(),
             this.props.tea.id,
             ip
@@ -91,32 +103,41 @@ class Tea extends Component {
                             <Fragment>
                                 <div className="row">
                                     <div className="col-12">
-                                        <h2 className="subheading">{this.props.loading? <Spinner/> : this.props.tea.content}</h2>
+                                            <span className="meta"
+                                                  style={{fontSize: '16px'}}>Posted on {getDate(this.props.tea.createdAt)}</span>
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-6">
-
-                                        <span className="meta">Posted on {getDate(this.props.tea.createdAt)}</span>
-                                    </div>
-                                    <div className="col-6 text-right">
-                                            <span className="font-weight-light mr-2">{this.props.tea.up}</span>
-                                            <i className="far fa-thumbs-up" style={{fontSize: '18px'}}/>
-
-                                            <span className="font-weight-light ml-2 mr-2">{this.props.tea.down}</span>
-                                            <i className="far fa-thumbs-down" style={{fontSize: '18px'}}/>
+                                    <div className="col-12">
+                                        <h2 className="subheading">{this.props.loading ?
+                                            <Spinner/> : this.props.tea.content}</h2>
                                     </div>
                                 </div>
-                            </Fragment> : null}
+                                <div className="row">
+                                    <div className="col-12 text-right">
+                                            <span className="font-weight-light mr-2"
+                                                  style={{fontSize: '16px'}}>{this.props.tea.up}</span>
+                                        <i className="far fa-thumbs-up" style={{fontSize: '16px'}}/>
+
+                                        <span className="font-weight-light ml-2 mr-2"
+                                              style={{fontSize: '16px'}}>{this.props.tea.down}</span>
+                                        <i className="far fa-thumbs-down" style={{fontSize: '16px'}}/>
+                                    </div>
+                                </div>
+                            </Fragment> : <Error/>}
                     </Header>
-                    {this.props.tea ? (this.props.loading? <Spinner/> : <CommentsSection
-                        comments={this.props.tea.comments.items}
-                        submit={this.submitCommentHandler}
-                        changed={this.changeCommentHandler}
-                        comment={this.state.comment}
-                        submitting={this.state.submittingComment}
-                        valid={this.state.valid}
-                    />) : <Spinner/>}
+                    {this.props.tea && this.props.error === null?
+                        (this.props.loading ? <Spinner/> :
+                            <CommentsSection
+                                comments={this.props.tea.comments.items}
+                                submit={this.submitCommentHandler}
+                                submitGIF={this.submitGIFCommentHandler}
+                                changed={this.changeCommentHandler}
+                                comment={this.state.comment}
+                                submitting={this.state.submittingComment}
+                                valid={this.state.valid}/>)
+                        : (this.props.error?
+                           <TakeMeAway/>: <Spinner/>)}
                 </Layout>
             );
         }
@@ -127,6 +148,7 @@ const mapStateToProps = (state) => {
     return {
         tea: state.teaReducer.tea,
         loading: state.teaReducer.loading,
+        error: state.teaReducer.error,
         blocked: state.teasReducer.blocked
     }
 };

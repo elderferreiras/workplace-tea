@@ -30,7 +30,6 @@ class Home extends Component {
 
         if(!this.props.hasEverything && !this.props.next) {
             this.props.fetchTeas();
-            console.log('loaded through component did mount');
         }
     }
 
@@ -41,7 +40,6 @@ class Home extends Component {
 
         if ((height) >= document.body.offsetHeight - 200) {
             if (this.props.next !== this.props.previous) {
-                console.log('loaded throug height');
                this.props.fetchTeas();
             }
         }

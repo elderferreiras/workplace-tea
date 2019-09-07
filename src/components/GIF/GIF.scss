@@ -1,0 +1,23 @@
+.GIF {
+  .carousel-inner {
+    background-color: #343b40;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    right: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    text-align: center;
+
+    button {
+      padding: 6px 8px;
+      margin-left: 3px;
+      margin-bottom: 3px;
+    }
+  }
+}

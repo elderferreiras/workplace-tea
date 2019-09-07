@@ -1,0 +1,42 @@
+.GIFSearch {
+  padding-left: 0;
+  padding-right: 15px;
+
+  .input-group-text {
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-danger {
+    padding: 6px 12px;
+  }
+
+  .input-group-append {
+    margin-left: 5px;
+  }
+
+  .form-control {
+    padding-left: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #ced4da;
+    border-radius: 0;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+
+    &:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      background-color: transparent;
+      color: #fff;
+    }
+  }
+}

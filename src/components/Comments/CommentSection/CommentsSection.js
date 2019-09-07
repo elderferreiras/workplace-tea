@@ -20,6 +20,7 @@ const commentsSection = (props) => {
                     <CommentForm
                         comment={props.comment}
                         submit={props.submit}
+                        submitGIF={props.submitGIF}
                         changed={props.changed}
                         submitting={props.submitting}
                         valid={props.valid}

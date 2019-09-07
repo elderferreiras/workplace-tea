@@ -29,11 +29,21 @@ export const fetchTea = (id) => {
     return (dispatch) => {
         dispatch(fetchTeaStart());
         API.graphql(graphqlOperation(getTea, {id: id})).then(res => {
-            dispatch(fetchTeaSuccess(res.data.getTea));
+            if(res.data.getTea) {
+                dispatch(fetchTeaSuccess(res.data.getTea));
+            } else {
+                dispatch(fetchTeaFail({status: "Not found."}));
+            }
         }).catch(err => {
             dispatch(fetchTeaFail(err));
         });
     }
+};
+
+export const createCommentStart = (tea) => {
+    return {
+        type: actionTypes.CREATE_COMMENT_START
+    };
 };
 
 export const createCommentSuccess = (tea) => {
@@ -43,8 +53,17 @@ export const createCommentSuccess = (tea) => {
     };
 };
 
+export const createCommentFail = (err) => {
+    return {
+        type: actionTypes.CREATE_COMMENT_FAIL,
+        error: err
+    };
+};
+
 export const createComment = (content, author, teaId, ip = null) => {
     return (dispatch) => {
+        dispatch(createCommentStart());
+
         const data = {
             input: {
                 content: content,
@@ -60,6 +79,8 @@ export const createComment = (content, author, teaId, ip = null) => {
 
         API.graphql(graphqlOperation(mutations.createComment, data)).then(res => {
             dispatch(createCommentSuccess(res.data.createComment.tea));
+        }).catch(err => {
+            dispatch(createCommentFail(err));
         });
     }
 };

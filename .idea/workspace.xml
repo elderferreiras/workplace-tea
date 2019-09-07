@@ -2,14 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Comments/Comment/Comment.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GIF/GIF.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GIF/GIF.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GIF/GIFSearch/GIFSearch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GIF/GIFSearch/GIFSearch.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Theme/Error/Error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Theme/TakeMeAway/TakeMeAway.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comments/Comment/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/Comment/Comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentForm/CommentForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/CommentSection/CommentsSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Items/Item/Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Items/Item/Item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Theme/Nav/Nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/Nav/Nav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Theme/Form/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Theme/Form/Form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Tea/Tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Tea/Tea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/tea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/tea.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +31,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="SCSS File" />
         <option value="JavaScript File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -43,16 +54,16 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/src/assets/style" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/GIF" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/containers/Tea" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
       <recent name="$PROJECT_DIR$/src/containers/AppRouter" />
-      <recent name="$PROJECT_DIR$/src/components/Theme/Spinner" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/src/assets/style" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -102,7 +113,9 @@
       <workItem from="1567641904581" duration="12429000" />
       <workItem from="1567656793081" duration="28177000" />
       <workItem from="1567816707559" duration="465000" />
-      <workItem from="1567822982600" duration="6133000" />
+      <workItem from="1567822982600" duration="7563000" />
+      <workItem from="1567866316555" duration="1040000" />
+      <workItem from="1567867890981" duration="10769000" />
     </task>
     <servers />
   </component>
