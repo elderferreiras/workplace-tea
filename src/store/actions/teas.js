@@ -154,7 +154,7 @@ export const countUpVote = (id, countUp, countDown) => {
             countUp++;
             countDown--;
         } else {
-            localStorage.setItem(key, voting.DOWN);
+            localStorage.setItem(key, voting.UP);
             countUp++;
         }
 
