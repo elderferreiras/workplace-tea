@@ -7,7 +7,7 @@ class Item extends Component {
     render() {
         return (
             <Fragment>
-                <div className="post-preview">
+                <div id={this.props.id} className="post-preview">
                     <div className="row text-left">
                         <div className="col-12">
                             <p className="post-meta">

@@ -18,6 +18,9 @@ const nav = () => {
                         <li className="nav-item">
                             <Link to="/about" className="nav-link">About</Link>
                         </li>
+                        <li className="nav-item">
+                            <a href="https://twitter.com/workplacetea" className="nav-link" target="_blank" rel="noopener noreferrer" >Twitter</a>
+                        </li>
                     </ul>
                 </Navbar.Collapse>
             </div>

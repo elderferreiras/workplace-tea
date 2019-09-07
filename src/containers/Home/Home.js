@@ -30,16 +30,18 @@ class Home extends Component {
 
         if(!this.props.hasEverything && !this.props.next) {
             this.props.fetchTeas();
+            console.log('loaded through component did mount');
         }
     }
 
     loadTeas = () => {
-        if (this.props.loading || this.props.starting || this.props.next === null) return;
+        if (window.location.pathname !== '/' || this.props.loading || this.props.starting || this.props.next === null) return;
 
         const height = window.innerHeight + window.pageYOffset;
 
         if ((height) >= document.body.offsetHeight - 200) {
             if (this.props.next !== this.props.previous) {
+                console.log('loaded throug height');
                this.props.fetchTeas();
             }
         }

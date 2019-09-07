@@ -13,9 +13,9 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Route path="/" exact component={Home}/>
-                <Route path="/about" component={About} exact/>
                 <Route path="/tea/:id" component={Tea} exact/>
+                <Route path="/about" component={About} exact/>
+                <Route path="/" component={Home} exact/>
             </Router>
         );
     }

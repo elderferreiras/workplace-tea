@@ -2,7 +2,12 @@ import React from 'react';
 import Comments from "../Comments";
 import CommentForm from "../CommentForm/CommentForm";
 
+import {withRouter} from 'react-router-dom';
 const commentsSection = (props) => {
+    const goBack = () => {
+        props.history.goBack();
+    };
+
     return (
         <div className="container">
             <div className="row">
@@ -19,10 +24,13 @@ const commentsSection = (props) => {
                         submitting={props.submitting}
                         valid={props.valid}
                     />
+
+                    <button className="btn btn-outline-secondary mt-5" type="button" onClick={goBack}><i
+                        className="fas fa-arrow-left"/> Back</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default commentsSection;
+export default withRouter(commentsSection);

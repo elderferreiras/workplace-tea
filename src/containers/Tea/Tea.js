@@ -9,7 +9,8 @@ import randomGenerator from 'random-username-generator';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions';
 import axios from "axios";
-import {validate} from "../../utility/utility";
+import {checkVote, validate} from "../../utility/utility";
+import * as votingType from "../../store/actions/voting";
 
 class Tea extends Component {
     state = {
@@ -30,7 +31,7 @@ class Tea extends Component {
             this.setState({submittingComment: true});
             if (this.isCommentValid(this.state.comment)) {
                 axios.get('https://api.ipify.org/?format=json').then(res => {
-                    if(res.data.ip.length) {
+                    if (res.data.ip.length) {
                         this.createComment(res.data.ip);
                     } else {
                         this.loadFakeComment();
@@ -41,7 +42,7 @@ class Tea extends Component {
                     this.createComment();
                 });
             } else {
-               this.loadFakeComment();
+                this.loadFakeComment();
             }
 
         }
@@ -88,18 +89,34 @@ class Tea extends Component {
                     <Header backgroundImage={TeaBackground} page="post">
                         {this.props.tea ?
                             <Fragment>
-                                <h2 className="subheading">{this.props.tea.content}</h2>
-                                <span className="meta">Posted on {getDate(this.props.tea.createdAt)}</span>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <h2 className="subheading">{this.props.loading? <Spinner/> : this.props.tea.content}</h2>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-6">
+
+                                        <span className="meta">Posted on {getDate(this.props.tea.createdAt)}</span>
+                                    </div>
+                                    <div className="col-6 text-right">
+                                            <span className="font-weight-light mr-2">{this.props.tea.up}</span>
+                                            <i className="far fa-thumbs-up" style={{fontSize: '18px'}}/>
+
+                                            <span className="font-weight-light ml-2 mr-2">{this.props.tea.down}</span>
+                                            <i className="far fa-thumbs-down" style={{fontSize: '18px'}}/>
+                                    </div>
+                                </div>
                             </Fragment> : null}
                     </Header>
-                    {this.props.tea ? <CommentsSection
+                    {this.props.tea ? (this.props.loading? <Spinner/> : <CommentsSection
                         comments={this.props.tea.comments.items}
                         submit={this.submitCommentHandler}
                         changed={this.changeCommentHandler}
                         comment={this.state.comment}
                         submitting={this.state.submittingComment}
                         valid={this.state.valid}
-                    /> : <Spinner/>}
+                    />) : <Spinner/>}
                 </Layout>
             );
         }
@@ -109,6 +126,7 @@ class Tea extends Component {
 const mapStateToProps = (state) => {
     return {
         tea: state.teaReducer.tea,
+        loading: state.teaReducer.loading,
         blocked: state.teasReducer.blocked
     }
 };

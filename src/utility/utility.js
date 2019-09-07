@@ -42,10 +42,6 @@ export const validate = (content, params) => {
     if(params.consecutive && /([a-zA-Z])\1{2,}/g.test(content)) {
         return false;
     }
-    //Check for some special characters.
-    if(params.specialCharacters && /[~`#$%^&+=\-\[\]{}|"<>]/g.test(content)) {
-        return false
-    }
 
     //Check if there's not another tea with the same content
     if (params.teas && params.teas.findIndex(tea => content === tea.content) !== -1) {
