@@ -165,13 +165,6 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         createdAt
       }
       comments {
-          items {
-            id
-            content
-            author
-            ip
-            createdAt
-          }
         nextToken
       }
     }
@@ -248,6 +241,27 @@ export const deleteBlockedIPs = `mutation DeleteBlockedIPs($input: DeleteBlocked
   deleteBlockedIPs(input: $input) {
     id
     ip
+  }
+}
+`;
+export const createFlaggedTea = `mutation CreateFlaggedTea($input: CreateFlaggedTeaInput!) {
+  createFlaggedTea(input: $input) {
+    id
+    teaId
+  }
+}
+`;
+export const updateFlaggedTea = `mutation UpdateFlaggedTea($input: UpdateFlaggedTeaInput!) {
+  updateFlaggedTea(input: $input) {
+    id
+    teaId
+  }
+}
+`;
+export const deleteFlaggedTea = `mutation DeleteFlaggedTea($input: DeleteFlaggedTeaInput!) {
+  deleteFlaggedTea(input: $input) {
+    id
+    teaId
   }
 }
 `;

@@ -175,3 +175,32 @@ export const listBlockedIPss = `query ListBlockedIPss(
   }
 }
 `;
+export const getFlaggedTea = `query GetFlaggedTea($teaId: String!) {
+  getFlaggedTea(teaId: $teaId) {
+    id
+    teaId
+  }
+}
+`;
+export const listFlaggedTeas = `query ListFlaggedTeas(
+  $teaId: String
+  $filter: ModelFlaggedTeaFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listFlaggedTeas(
+    teaId: $teaId
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      teaId
+    }
+    nextToken
+  }
+}
+`;

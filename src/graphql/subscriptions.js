@@ -244,3 +244,24 @@ export const onDeleteBlockedIPs = `subscription OnDeleteBlockedIPs {
   }
 }
 `;
+export const onCreateFlaggedTea = `subscription OnCreateFlaggedTea {
+  onCreateFlaggedTea {
+    id
+    teaId
+  }
+}
+`;
+export const onUpdateFlaggedTea = `subscription OnUpdateFlaggedTea {
+  onUpdateFlaggedTea {
+    id
+    teaId
+  }
+}
+`;
+export const onDeleteFlaggedTea = `subscription OnDeleteFlaggedTea {
+  onDeleteFlaggedTea {
+    id
+    teaId
+  }
+}
+`;

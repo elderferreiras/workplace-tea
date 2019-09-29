@@ -26,3 +26,8 @@ type BlockedIPs @model @key(fields: ["ip"])  {
   id: ID!
   ip: String!
 }
+
+type FlaggedTea @model @key(fields: ["teaId"])  {
+  id: ID!
+  teaId: String!
+}
