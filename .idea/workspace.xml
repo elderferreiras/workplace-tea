@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fc6a27b0-c7df-4f36-b7d1-d11d0db0c296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/workplacetea/parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/workplacetea/parameters.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/teas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/teas.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +102,12 @@
       <workItem from="1567867890981" duration="13397000" />
       <workItem from="1568033209793" duration="16000" />
       <workItem from="1568166285177" duration="1191000" />
-      <workItem from="1568293415807" duration="2734000" />
+      <workItem from="1568293415807" duration="3472000" />
+      <workItem from="1568472192681" duration="2255000" />
+      <workItem from="1568678816888" duration="2171000" />
+      <workItem from="1568681269759" duration="602000" />
+      <workItem from="1568682307022" duration="1039000" />
+      <workItem from="1569716576779" duration="1550000" />
     </task>
     <servers />
   </component>

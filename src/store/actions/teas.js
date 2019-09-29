@@ -1,11 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 import {getWorkplaceId} from "../../helpers/utils";
 import {API, graphqlOperation} from "aws-amplify";
-import {getBlockedIPs, getWorkplace} from "../../graphql/queries";
+import {getBlockedIPs, getTea, getWorkplace} from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 import axios from "axios";
 import * as voting from './voting';
 import {postTweet} from "../../services/twitter";
+
 const uuidv4 = require('uuid/v4');
 
 export const fetchTeasStart = () => {
@@ -89,7 +90,7 @@ export const submitTea = (content, ip = null) => {
             }
         };
 
-        if(ip) {
+        if (ip) {
             data.input.ip = ip;
         }
 
@@ -143,28 +144,35 @@ export const updateVote = (id, tea) => {
 
 export const countUpVote = (id, countUp, countDown) => {
     return (dispatch) => {
-        const key = `CognitoIdentityServiceProvider#${id}`;
-        const vote = localStorage.getItem(key);
+        API.graphql(graphqlOperation(getTea, {id: id})).then(res => {
+            return res.data.getTea;
+        }).then(res => {
+            const key = `CognitoIdentityServiceProvider#${id}`;
+            const vote = localStorage.getItem(key);
 
-        if (vote === voting.UP) {
-            localStorage.removeItem(key);
-            countUp--;
-        } else if (vote === voting.DOWN) {
-            localStorage.setItem(key, voting.UP);
-            countUp++;
-            countDown--;
-        } else {
-            localStorage.setItem(key, voting.UP);
-            countUp++;
-        }
+            countUp = res.up;
+            countDown = res.down;
 
-        API.graphql(graphqlOperation(mutations.updateTea, {
-            input: {
-                id: id,
-                up: countUp < 0 ? 0 : countUp,
-                down: countDown < 0 ? 0 : countDown
+            if (vote === voting.UP) {
+                localStorage.removeItem(key);
+                countUp--;
+            } else if (vote === voting.DOWN) {
+                localStorage.setItem(key, voting.UP);
+                countUp++;
+                countDown--;
+            } else {
+                localStorage.setItem(key, voting.UP);
+                countUp++;
             }
-        })).then(res => {
+
+            return API.graphql(graphqlOperation(mutations.updateTea, {
+                input: {
+                    id: id,
+                    up: countUp < 0 ? 0 : countUp,
+                    down: countDown < 0 ? 0 : countDown
+                }
+            }));
+        }).then(res => {
             dispatch(updateVote(id, res.data.updateTea));
         });
     };
@@ -172,28 +180,36 @@ export const countUpVote = (id, countUp, countDown) => {
 
 export const countDownVote = (id, countUp, countDown) => {
     return (dispatch) => {
-        const key = `CognitoIdentityServiceProvider#${id}`;
-        const vote = localStorage.getItem(key);
 
-        if (vote === voting.DOWN) {
-            localStorage.removeItem(key);
-            countDown--;
-        } else if (vote === voting.UP) {
-            localStorage.setItem(key, voting.DOWN);
-            countUp--;
-            countDown++;
-        } else {
-            localStorage.setItem(key, voting.DOWN);
-            countDown++;
-        }
+        API.graphql(graphqlOperation(getTea, {id: id})).then(res => {
+            return res.data.getTea;
+        }).then(res => {
+            const key = `CognitoIdentityServiceProvider#${id}`;
+            const vote = localStorage.getItem(key);
 
-        API.graphql(graphqlOperation(mutations.updateTea, {
-            input: {
-                id: id,
-                up: countUp < 0 ? 0 : countUp,
-                down: countDown < 0 ? 0 : countDown
+            countUp = res.up;
+            countDown = res.down;
+
+            if (vote === voting.DOWN) {
+                localStorage.removeItem(key);
+                countDown--;
+            } else if (vote === voting.UP) {
+                localStorage.setItem(key, voting.DOWN);
+                countUp--;
+                countDown++;
+            } else {
+                localStorage.setItem(key, voting.DOWN);
+                countDown++;
             }
-        })).then(res => {
+
+            return API.graphql(graphqlOperation(mutations.updateTea, {
+                input: {
+                    id: id,
+                    up: countUp < 0 ? 0 : countUp,
+                    down: countDown < 0 ? 0 : countDown
+                }
+            }));
+        }).then(res => {
             dispatch(updateVote(id, res.data.updateTea));
         });
     };
