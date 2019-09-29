@@ -165,6 +165,13 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         createdAt
       }
       comments {
+        items {
+            id
+            content
+            author
+            ip
+            createdAt
+          }
         nextToken
       }
     }
