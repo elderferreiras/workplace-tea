@@ -224,10 +224,12 @@ export const loadFakeTea = (tea) => {
 
 export const loadInappropriateTea = (content) => {
     return (dispatch) => {
+        const d = new Date();
+
         dispatch(loadFakeTea({
                 id: uuidv4(),
                 content: content,
-                createdAt: '2019-09-06T02:11:16.789Z',
+                createdAt: d.toISOString(),
                 up: 0,
                 down: 0,
                 ip: null,

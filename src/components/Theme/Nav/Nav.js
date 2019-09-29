@@ -1,13 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Navbar} from 'react-bootstrap'
+import Logo from '../../../assets/images/icon_transparent.png';
 
 const nav = () => {
     return (
         <Navbar expand="lg" className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div className="container">
                 <Link to="/" className="navbar-brand">
-                    Workplace Tea <i className="fas fa-coffee" style={{fontSize: '18px'}}/>
+                    <img src={Logo} width={25} height={25} alt="Workplace Tea"/> Workplace Tea
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">

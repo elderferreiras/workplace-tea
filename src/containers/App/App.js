@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import About from '../../components/About/About';
 import Home from '../Home/Home';
 import Tea from '../Tea/Tea';
+import PrivacyPolicy from '../../components/PrivacyPolicy/PrivacyPolicy';
 import aws_exports from '../../aws-exports';
 import Amplify from 'aws-amplify';
 
@@ -15,6 +16,7 @@ class App extends Component {
             <Router>
                 <Route path="/tea/:id" component={Tea} exact/>
                 <Route path="/about" component={About} exact/>
+                <Route path="/privacy-policy" component={PrivacyPolicy} exact/>
                 <Route path="/" component={Home} exact/>
             </Router>
         );
