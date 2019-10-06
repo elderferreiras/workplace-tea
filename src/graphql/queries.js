@@ -204,3 +204,135 @@ export const listFlaggedTeas = `query ListFlaggedTeas(
   }
 }
 `;
+export const getFlaggedComment = `query GetFlaggedComment($commentId: String!) {
+  getFlaggedComment(commentId: $commentId) {
+    id
+    comment
+    commentId
+  }
+}
+`;
+export const listFlaggedComments = `query ListFlaggedComments(
+  $commentId: String
+  $filter: ModelFlaggedCommentFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listFlaggedComments(
+    commentId: $commentId
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      comment
+      commentId
+    }
+    nextToken
+  }
+}
+`;
+export const getAgreedToEula = `query GetAgreedToEula($identifier: String!) {
+  getAgreedToEULA(identifier: $identifier) {
+    id
+    identifier
+    ip
+    agreed
+  }
+}
+`;
+export const listAgreedToEulAs = `query ListAgreedToEulAs(
+  $identifier: String
+  $filter: ModelAgreedToEULAFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listAgreedToEULAs(
+    identifier: $identifier
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      identifier
+      ip
+      agreed
+    }
+    nextToken
+  }
+}
+`;
+export const getBlockedUsers = `query GetBlockedUsers($identifier: String!) {
+  getBlockedUsers(identifier: $identifier) {
+    id
+    identifier
+    ip
+    blockedIdentifier
+    blockedIP
+  }
+}
+`;
+export const listBlockedUserss = `query ListBlockedUserss(
+  $identifier: String
+  $filter: ModelBlockedUsersFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listBlockedUserss(
+    identifier: $identifier
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      identifier
+      ip
+      blockedIdentifier
+      blockedIP
+    }
+    nextToken
+  }
+}
+`;
+export const getBlockedContent = `query GetBlockedContent($identifier: String!) {
+  getBlockedContent(identifier: $identifier) {
+    id
+    identifier
+    commentId
+    teaId
+  }
+}
+`;
+export const listBlockedContents = `query ListBlockedContents(
+  $identifier: String
+  $filter: ModelBlockedContentFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listBlockedContents(
+    identifier: $identifier
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      identifier
+      commentId
+      teaId
+    }
+    nextToken
+  }
+}
+`;
