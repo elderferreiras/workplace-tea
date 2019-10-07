@@ -13,6 +13,7 @@ export const createWorkplace = `mutation CreateWorkplace($input: CreateWorkplace
         up
         down
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -32,6 +33,7 @@ export const updateWorkplace = `mutation UpdateWorkplace($input: UpdateWorkplace
         up
         down
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -51,6 +53,7 @@ export const deleteWorkplace = `mutation DeleteWorkplace($input: DeleteWorkplace
         up
         down
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -65,6 +68,7 @@ export const createTea = `mutation CreateTea($input: CreateTeaInput!) {
     up
     down
     ip
+    identifier
     createdAt
     workplace {
       id
@@ -80,6 +84,7 @@ export const createTea = `mutation CreateTea($input: CreateTeaInput!) {
         content
         author
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -94,6 +99,7 @@ export const updateTea = `mutation UpdateTea($input: UpdateTeaInput!) {
     up
     down
     ip
+    identifier
     createdAt
     workplace {
       id
@@ -109,6 +115,7 @@ export const updateTea = `mutation UpdateTea($input: UpdateTeaInput!) {
         content
         author
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -123,6 +130,7 @@ export const deleteTea = `mutation DeleteTea($input: DeleteTeaInput!) {
     up
     down
     ip
+    identifier
     createdAt
     workplace {
       id
@@ -138,6 +146,7 @@ export const deleteTea = `mutation DeleteTea($input: DeleteTeaInput!) {
         content
         author
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -170,6 +179,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
             content
             author
             ip
+            identifier
             createdAt
           }
         nextToken
@@ -184,6 +194,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     content
     author
     ip
+    identifier
     createdAt
     tea {
       id
@@ -191,6 +202,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
       up
       down
       ip
+      identifier
       createdAt
       workplace {
         id
@@ -210,6 +222,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     content
     author
     ip
+    identifier
     createdAt
     tea {
       id
@@ -217,6 +230,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
       up
       down
       ip
+      identifier
       createdAt
       workplace {
         id

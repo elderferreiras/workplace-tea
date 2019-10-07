@@ -1,6 +1,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+
 export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelSortDirection, $limit: Int, $nextToken: String) {
   getWorkplace(id: $id) {
     id
@@ -13,10 +14,12 @@ export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelS
         up
         down
         ip
+        identifier
         createdAt
         comments {
             items {
                 content
+                identifier
                 ip
             }
         }
@@ -51,6 +54,7 @@ export const getTea = `query GetTea($id: ID!) {
     up
     down
     ip
+    identifier
     createdAt
     workplace {
       id
@@ -66,6 +70,7 @@ export const getTea = `query GetTea($id: ID!) {
         content
         author
         ip
+        identifier
         createdAt
       }
       nextToken
@@ -81,6 +86,7 @@ export const listTeas = `query ListTeas($filter: ModelTeaFilterInput, $limit: In
       up
       down
       ip
+      identifier
       createdAt
       workplace {
         id
@@ -101,6 +107,7 @@ export const getComment = `query GetComment($id: ID!) {
     content
     author
     ip
+    identifier
     createdAt
     tea {
       id
@@ -108,6 +115,7 @@ export const getComment = `query GetComment($id: ID!) {
       up
       down
       ip
+      identifier
       createdAt
       workplace {
         id
@@ -132,6 +140,7 @@ export const listComments = `query ListComments(
       content
       author
       ip
+      identifier
       createdAt
       tea {
         id
@@ -139,6 +148,7 @@ export const listComments = `query ListComments(
         up
         down
         ip
+        identifier
         createdAt
       }
     }

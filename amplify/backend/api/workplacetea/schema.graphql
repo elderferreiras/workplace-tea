@@ -10,6 +10,7 @@ type Tea @model {
   up: Int
   down: Int
   ip: String
+  identifier: String
   createdAt: AWSDateTime
   workplace: Workplace @connection(name: "WorkplaceTeas")
   comments: [Comment] @connection(name: "TeaComments", sortField: "createdAt")
@@ -19,6 +20,7 @@ type Comment @model {
   content: String
   author: String
   ip: String
+  identifier: String
   createdAt: AWSDateTime
   tea: Tea @connection(name: "TeaComments")
 }
