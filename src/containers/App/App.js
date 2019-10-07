@@ -5,10 +5,6 @@ import About from '../../components/About/About';
 import Home from '../Home/Home';
 import Tea from '../Tea/Tea';
 import PrivacyPolicy from '../../components/PrivacyPolicy/PrivacyPolicy';
-import aws_exports from '../../aws-exports';
-import Amplify from 'aws-amplify';
-
-Amplify.configure(aws_exports);
 
 class App extends Component {
     render() {

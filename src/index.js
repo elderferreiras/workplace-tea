@@ -8,6 +8,10 @@ import {createStore, compose, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import teasReducer from './store/reducers/teas';
 import teaReducer from './store/reducers/tea';
+import aws_exports from './aws-exports';
+import Amplify from 'aws-amplify';
+
+Amplify.configure(aws_exports);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
