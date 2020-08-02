@@ -160,6 +160,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     content
     author
     ip
+    identifier
     createdAt
     tea {
       id
@@ -167,21 +168,14 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
       up
       down
       ip
+      identifier
       createdAt
       workplace {
         id
         name
         createdAt
       }
-     comments {
-        items {
-            id
-            content
-            author
-            ip
-            identifier
-            createdAt
-          }
+      comments {
         nextToken
       }
     }

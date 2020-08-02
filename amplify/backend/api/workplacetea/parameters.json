@@ -2,5 +2,5 @@
     "AppSyncApiName": "workplacetea",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": "false",
-    "APIKeyExpirationEpoch": "1590981239"
+    "APIKeyExpirationEpoch": "1607735944"
 }
