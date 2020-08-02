@@ -9,7 +9,7 @@ const items = (props) => {
         createdAt={item.createdAt}
         up={item.up}
         down={item.down}
-        comments={[]}
+        comments={item.comments.items}
     />);
 };
 

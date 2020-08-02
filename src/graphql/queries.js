@@ -1,12 +1,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getWorkplace = `query GetWorkplace($id: ID!) {
+
+export const getWorkplace = `query GetWorkplace($id: ID!, $sortDirection: ModelSortDirection, $limit: Int, $nextToken: String) {
   getWorkplace(id: $id) {
     id
     name
     createdAt
-    teas {
+    teas(sortDirection: $sortDirection, limit: $limit, nextToken: $nextToken) {
       items {
         id
         content
@@ -15,6 +16,13 @@ export const getWorkplace = `query GetWorkplace($id: ID!) {
         ip
         identifier
         createdAt
+        comments {
+            items {
+                content
+                identifier
+                ip
+            }
+        }
       }
       nextToken
     }
